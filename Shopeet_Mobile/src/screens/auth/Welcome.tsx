@@ -2,9 +2,11 @@ import React from "react";
 import { View, Image, TouchableOpacity, Text } from "react-native";
 import { welcomeScreenStyle } from "./style";
 import Header from "../../components/Header";
-import { welcomeScreenImages } from "../../resources/Images";
+import { Images } from "../../resources/Images";
+import { StackActions, useNavigation } from "@react-navigation/native";
 
 const Welcome: React.FunctionComponent<{}> = () => {
+  const navigation: any = useNavigation();
   return (
     <View style={welcomeScreenStyle.container}>
       <Header
@@ -13,14 +15,16 @@ const Welcome: React.FunctionComponent<{}> = () => {
         subHeaderText2={"which enables you to verify"}
       />
       <View style={welcomeScreenStyle.imageView}>
-        <Image
-          source={welcomeScreenImages.image}
-          style={welcomeScreenStyle.image}
-        />
+        <Image source={Images.image} style={welcomeScreenStyle.image} />
       </View>
       <View style={welcomeScreenStyle.buttonView}>
         <View>
-          <TouchableOpacity style={welcomeScreenStyle.loginBtn}>
+          <TouchableOpacity
+            style={welcomeScreenStyle.loginBtn}
+            onPress={() => {
+              navigation.dispatch(StackActions.replace("Login", {}));
+            }}
+          >
             <Text style={welcomeScreenStyle.loginBtnText}>Login</Text>
           </TouchableOpacity>
         </View>

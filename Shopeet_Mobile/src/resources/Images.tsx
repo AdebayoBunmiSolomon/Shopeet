@@ -1,3 +1,4 @@
-export const welcomeScreenImages = {
-  image: require("../../assets/icons/welcome3.jpg"),
+export const Images = {
+  image: require("../../assets/icons/welcome.jpg"),
+  loginImage: require("../../assets/icons/login.png"),
 };

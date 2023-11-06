@@ -39,3 +39,18 @@ export const loginScreenColors = {
     },
   },
 };
+
+export const signUpScreenColors = {
+  form: {
+    tertiary: "#FFFFFF",
+    primary: "#2F0FD8",
+    secondary: "#F01530",
+  },
+  button: {
+    backGroundColor: {
+      tertiary: "#E77602",
+      secondary: "#2F0FD8",
+      primary: "#F01530",
+    },
+  },
+};

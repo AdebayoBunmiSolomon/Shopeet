@@ -1,5 +1,8 @@
 import { StyleSheet, Dimensions, Platform } from "react-native";
-import { welcomeScreenColors } from "../../resources/Colors";
+import {
+  signUpScreenColors,
+  welcomeScreenColors,
+} from "../../resources/Colors";
 import { loginScreenColors } from "../../resources/Colors";
 
 const screenHeight = Dimensions.get("screen").height;
@@ -10,6 +13,14 @@ export const welcomeScreenStyle = StyleSheet.create({
     display: "flex",
     flex: 1,
     backgroundColor: welcomeScreenColors.backGroundColors.form.tertiary,
+  },
+  header: {
+    display: "flex",
+    flexDirection: "row",
+    paddingTop: Platform.OS === "android" ? 50 : 60,
+    justifyContent: "space-between",
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   imageView: {
     display: "flex",
@@ -62,20 +73,38 @@ export const loginScreenStyle = StyleSheet.create({
     display: "flex",
     flex: 1,
     backgroundColor: loginScreenColors.form.tertiary,
-    alignItems: "center",
     justifyContent: "center",
   },
-  textInputView: {
+  header: {
+    display: "flex",
+    flexDirection: "row",
+    paddingTop: Platform.OS === "android" ? 50 : 60,
+    justifyContent: "space-between",
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  formView: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  subFormView: {
     flexDirection: "column",
-    gap: 40,
-    width: screenWidth,
+    gap: Platform.OS === "android" ? 40 : 45,
+  },
+  textInputView: {
+    display: "flex",
+    flexDirection: "row",
+    width: "95%",
   },
   textInput: {
-    width: screenWidth - 30,
-    height: 40,
     borderBottomWidth: 1,
-    borderColor: "gray",
-    fontSize: Platform.OS === "android" ? 17 : 19,
+    width: "92%",
+    fontSize: Platform.OS === "android" ? 15 : 16,
+    paddingLeft: 3,
+  },
+  textInputIcon: {
+    paddingTop: 5,
   },
   button: {
     backgroundColor: loginScreenColors.button.backGroundColor.tertiary,
@@ -83,25 +112,24 @@ export const loginScreenStyle = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20,
-    width: screenWidth - 30,
   },
   buttonText: {
     color: welcomeScreenColors.textColor.text.secondary,
     fontFamily: "RobotoCondensed-Bold",
     fontSize: Platform.OS === "android" ? 17 : 20,
   },
-  textInputView2: {
+  bottomText: {
+    color: "gray",
+    fontSize: Platform.OS === "android" ? 17 : 20,
+  },
+  bottomTextView: {
     flexDirection: "row",
-    width: screenWidth - 30,
-    alignItems: "center",
-    justifyContent: "space-around",
-    paddingLeft: 30,
+    justifyContent: "center",
   },
-  textInputIcon: {
-    paddingRight: 20,
-  },
-  buttonView: {
-    paddingLeft: 13,
+  bottomButtonText: {
+    color: welcomeScreenColors.textColor.text.tertiary,
+    fontFamily: "RobotoCondensed-Bold",
+    fontSize: Platform.OS === "android" ? 17 : 20,
   },
   imageView: {
     display: "flex",
@@ -110,5 +138,68 @@ export const loginScreenStyle = StyleSheet.create({
   image: {
     height: 300,
     width: 300,
+  },
+});
+
+export const signUpScreenStyle = StyleSheet.create({
+  container: {
+    display: "flex",
+    flex: 1,
+    backgroundColor: signUpScreenColors.form.tertiary,
+    justifyContent: "center",
+  },
+  scrollViewContainer: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  header: {
+    display: "flex",
+    flexDirection: "row",
+    paddingTop: Platform.OS === "android" ? 50 : 60,
+    justifyContent: "space-between",
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  formView: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  subFormView: {
+    width: screenWidth,
+    height: screenHeight,
+    flexDirection: "column",
+    gap: Platform.OS === "android" ? 40 : 45,
+    alignItems: "center",
+    paddingTop: 20,
+  },
+  textInputView: {
+    width: "95%",
+    display: "flex",
+  },
+  textInput: {
+    width: "99%",
+    borderWidth: 1.1,
+    height: 45,
+    borderColor: "gray",
+    borderRadius: 10,
+    paddingLeft: 5,
+  },
+  buttonView: {
+    width: "97%",
+    alignItems: "center",
+  },
+  button: {
+    backgroundColor: loginScreenColors.button.backGroundColor.secondary,
+    height: 50,
+    width: "97%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 20,
+  },
+  buttonText: {
+    color: welcomeScreenColors.textColor.text.secondary,
+    fontFamily: "RobotoCondensed-Bold",
+    fontSize: Platform.OS === "android" ? 17 : 20,
   },
 });

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { headerStyle } from "./Style";
-import { headerProps } from "../interface/Header";
+import { headerProps } from "../interface/AppInterface";
 
 const Header: React.FunctionComponent<headerProps> = ({
   headerText,
@@ -10,7 +10,7 @@ const Header: React.FunctionComponent<headerProps> = ({
 }) => {
   return (
     <>
-      <View style={headerStyle.container}>
+      <View>
         <Text style={headerStyle.headerText}>{headerText}</Text>
         <View>
           <Text style={headerStyle.subHeaderText}>

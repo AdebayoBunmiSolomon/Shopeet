@@ -50,6 +50,8 @@ const Login: React.FunctionComponent<{}> = () => {
           headerText={"Login"}
           subHeaderText1={"provide credentials to gain access"}
           subHeaderText2={""}
+          headerTextStyle={loginScreenStyle.headerText}
+          subHeaderTextStyle={loginScreenStyle.subHeaderText}
         />
         <AppName color={loginScreenColors.button.backGroundColor.tertiary} />
       </View>

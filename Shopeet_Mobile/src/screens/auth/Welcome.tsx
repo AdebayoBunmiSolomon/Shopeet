@@ -16,6 +16,8 @@ const Welcome: React.FunctionComponent<{}> = () => {
           headerText={"Welcome"}
           subHeaderText1={"Automatic Identity Verification"}
           subHeaderText2={"which enables you to verify"}
+          headerTextStyle={welcomeScreenStyle.headerText}
+          subHeaderTextStyle={welcomeScreenStyle.subHeaderText}
         />
         <AppName
           color={welcomeScreenColors.backGroundColors.buttons.tertiary}
@@ -31,7 +33,7 @@ const Welcome: React.FunctionComponent<{}> = () => {
             onPress={() => {
               navigation.dispatch(StackActions.replace("Login", {}));
             }}>
-            <Text style={welcomeScreenStyle.loginBtnText}>Login</Text>
+            <Text style={welcomeScreenStyle.loginBtnText}>Continue</Text>
           </TouchableOpacity>
         </View>
         <View>

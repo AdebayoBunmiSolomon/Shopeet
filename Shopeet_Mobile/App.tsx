@@ -8,6 +8,7 @@ export default function App() {
   // FONTS
   const [fontsLoaded, fontError] = useFonts({
     "RobotoCondensed-Bold": require("./assets/fonts/RobotoCondensed-Bold.ttf"),
+    "RobotoCondensed-Regular": require("./assets/fonts/RobotoCondensed-Regular.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {

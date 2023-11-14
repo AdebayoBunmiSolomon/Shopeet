@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  ScrollView,
-  Image,
-  KeyboardAvoidingView,
-  Platform,
-  TouchableOpacity,
-  TextInput,
-  Text,
-} from "react-native";
+import { View, ScrollView, TouchableOpacity, Text } from "react-native";
 import { signUpScreenStyle } from "../style";
 import { signUpScreenColors } from "../../../resources/Colors";
 import Header from "../../../components/Header";

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { signUpScreenColors } from "../../../../resources/Colors";
 
 export const firstScreenStyle = StyleSheet.create({
@@ -13,7 +13,7 @@ export const firstScreenStyle = StyleSheet.create({
     paddingLeft: 10,
   },
   textInput: {
-    width: 300,
+    width: "100%",
     height: 50,
     paddingLeft: 5,
     borderRadius: 20,
@@ -21,7 +21,7 @@ export const firstScreenStyle = StyleSheet.create({
     borderWidth: 0.5,
   },
   phonePadView: {
-    width: 300,
+    width: "100%",
     height: 50,
     borderRadius: 20,
     backgroundColor: "white",
@@ -30,15 +30,16 @@ export const firstScreenStyle = StyleSheet.create({
     overflow: "hidden",
   },
   phonePadButton: {
-    backgroundColor: "#1a1b1dfc",
+    backgroundColor: "gainsboro",
     justifyContent: "center",
     alignItems: "center",
   },
   phonePadTextInput: {
-    width: 239,
+    width: 247,
     height: 49,
     paddingLeft: 5,
     backgroundColor: "white",
+    color: "#FFFFFF",
   },
 });
 
@@ -54,7 +55,7 @@ export const secondScreenStyle = StyleSheet.create({
     paddingLeft: 10,
   },
   textInput: {
-    width: 300,
+    width: Platform.OS === "android" ? 300 : 330,
     height: 50,
     paddingLeft: 5,
     borderRadius: 20,
@@ -75,7 +76,7 @@ export const thirdScreenStyle = StyleSheet.create({
     paddingLeft: 10,
   },
   textInput: {
-    width: 300,
+    width: Platform.OS === "android" ? 300 : 330,
     height: 50,
     paddingLeft: 5,
     borderRadius: 20,

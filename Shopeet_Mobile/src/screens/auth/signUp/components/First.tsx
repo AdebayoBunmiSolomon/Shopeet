@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Image } from "react-native";
+import { View, Text, TextInput, Dimensions } from "react-native";
 import { firstScreenStyle } from "./Style";
-import { TouchableOpacity } from "react-native";
-import DownIcon from "react-native-vector-icons/Entypo";
-import { Images } from "../../../../resources/Images";
+import PhoneInput from "react-native-phone-number-input";
+import Animated, { BounceInLeft } from "react-native-reanimated";
 
 const First: React.FunctionComponent<{}> = () => {
-  const [show, setShow] = useState<boolean>(false);
-  const [countryCode, setCountryCode] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+
   return (
-    <View>
+    <Animated.View entering={BounceInLeft.delay(200)}>
       <View style={firstScreenStyle.formView}>
         <View>
           <Text style={firstScreenStyle.label}>Enter Fullname</Text>
@@ -18,33 +17,21 @@ const First: React.FunctionComponent<{}> = () => {
         <View>
           <Text style={firstScreenStyle.label}>Enter Phone</Text>
           <View style={firstScreenStyle.phonePadView}>
-            <TouchableOpacity
-              style={firstScreenStyle.phonePadButton}
-              onPress={() => {
-                setShow(true);
-              }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: 10,
-                }}>
-                <DownIcon name='chevron-down' size={25} color={"white"} />
-                <Image
-                  source={Images.countryIcon}
-                  style={{ width: 25, height: 20 }}
-                />
-              </View>
-            </TouchableOpacity>
-            <TextInput
-              style={firstScreenStyle.phonePadTextInput}
-              keyboardType='phone-pad'
+            <PhoneInput
+              defaultCode='NG'
+              onChangeFormattedText={(number) => {
+                setPhoneNumber(number);
+                console.log(phoneNumber);
+              }}
+              textContainerStyle={firstScreenStyle.phonePadTextInput}
+              flagButtonStyle={firstScreenStyle.phonePadButton}
+              placeholder=''
+              codeTextStyle={{ color: "black" }}
             />
           </View>
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

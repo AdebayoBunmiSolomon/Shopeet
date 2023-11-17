@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { View, Text, TextInput, Dimensions } from "react-native";
 import { firstScreenStyle } from "./Style";
 import PhoneInput from "react-native-phone-number-input";
 import Animated, { BounceInLeft } from "react-native-reanimated";
+import { UseAuthContext } from "../../../../context/Auth/useAuth";
 
 const First: React.FunctionComponent<{}> = () => {
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const { signUpForm, setSignUpForm } = useContext(UseAuthContext);
 
   return (
     <Animated.View entering={BounceInLeft.delay(200)}>
       <View style={firstScreenStyle.formView}>
         <View>
           <Text style={firstScreenStyle.label}>Enter Fullname</Text>
-          <TextInput style={firstScreenStyle.textInput} />
+          <TextInput
+            style={firstScreenStyle.textInput}
+            onChangeText={(fullname) => {
+              setSignUpForm({ ...signUpForm, fullname: fullname });
+            }}
+          />
         </View>
         <View>
           <Text style={firstScreenStyle.label}>Enter Phone</Text>
@@ -20,8 +26,7 @@ const First: React.FunctionComponent<{}> = () => {
             <PhoneInput
               defaultCode='NG'
               onChangeFormattedText={(number) => {
-                setPhoneNumber(number);
-                console.log(phoneNumber);
+                setSignUpForm({ ...signUpForm, phone: number });
               }}
               textContainerStyle={firstScreenStyle.phonePadTextInput}
               flagButtonStyle={firstScreenStyle.phonePadButton}

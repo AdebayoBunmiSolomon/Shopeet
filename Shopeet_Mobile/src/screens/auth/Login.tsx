@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   View,
   Text,
@@ -17,6 +17,7 @@ import { Images } from "../../resources/Images";
 import AppName from "../../components/AppName";
 import { loginScreenColors } from "../../resources/Colors";
 import { StackActions, useNavigation } from "@react-navigation/native";
+import Message from "../../components/Message";
 
 const Login: React.FunctionComponent<{}> = () => {
   const navigation: any = useNavigation();
@@ -25,22 +26,62 @@ const Login: React.FunctionComponent<{}> = () => {
   const [passWordBorderColor, setPassWordBorderColor] =
     useState<string>("gray");
 
-  const onTextUsernameFocus = () => {
-    setUserNameBorderColor("#E77602");
-  };
-  const onTextUsernameBlur = () => {
-    setUserNameBorderColor("gray");
+  //form data state for username & password
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+  //msg data state
+  const [msgDetails, setMsgDetails] = useState<any>({
+    msgType: "",
+    animationTimeIn: 0,
+    msgText: "",
+  });
+  //username and password for input focus
+  const username_ref = useRef<any>(null);
+  const password_ref = useRef<any>(null);
+
+  //to clear toast message
+  const [isShow, setIsShow] = useState<boolean>(false);
+  const timeOutMsg = (timeOutVal: number) => {
+    setIsShow(true);
+    const timer = setTimeout(() => {
+      setIsShow(false);
+      clearTimeout(timer);
+    }, timeOutVal);
   };
 
-  const onTextPasswordFocus = () => {
-    setPassWordBorderColor("#E77602");
-  };
-  const onTextPasswordBlur = () => {
-    setPassWordBorderColor("gray");
-  };
-
+  //handleSignUp
   const SignUp = () => {
-    navigation.dispatch(StackActions.replace("SignUp", {}));
+    navigation.dispatch(StackActions.replace("SignUpContext", {}));
+  };
+
+  //handleLogin
+  const Login = () => {
+    if (!formData.username.trim()) {
+      setMsgDetails({
+        ...msgDetails,
+        msgText: "Username is empty",
+        msgType: "danger",
+        animationTimeIn: 200,
+      });
+      timeOutMsg(1500);
+      username_ref.current.focus();
+      return null;
+    }
+    if (!formData.password.trim()) {
+      setMsgDetails({
+        ...msgDetails,
+        msgText: "Password is empty",
+        msgType: "danger",
+        animationTimeIn: 200,
+      });
+      timeOutMsg(1500);
+      password_ref.current.focus();
+      return null;
+    } else {
+      console.log(formData.username + " " + formData.password);
+    }
   };
 
   return (
@@ -54,6 +95,12 @@ const Login: React.FunctionComponent<{}> = () => {
           subHeaderTextStyle={loginScreenStyle.subHeaderText}
         />
         <AppName color={loginScreenColors.button.backGroundColor.tertiary} />
+        <Message
+          msgType={msgDetails.msgType !== "" ? msgDetails.msgType : "danger"}
+          msgText={msgDetails.msgText}
+          animationTimeIn={msgDetails.timeIn}
+          show={isShow}
+        />
       </View>
       <ScrollView contentContainerStyle={loginScreenStyle.container}>
         <View style={loginScreenStyle.imageView}>
@@ -86,11 +133,16 @@ const Login: React.FunctionComponent<{}> = () => {
                   },
                 ]}
                 onFocus={() => {
-                  onTextUsernameFocus();
+                  setUserNameBorderColor("#E77602");
                 }}
                 onBlur={() => {
-                  onTextUsernameBlur();
+                  setUserNameBorderColor("gray");
                 }}
+                value={formData.username}
+                onChangeText={(username) => {
+                  setFormData({ ...formData, username: username });
+                }}
+                ref={username_ref}
               />
             </View>
             <View style={loginScreenStyle.textInputView}>
@@ -116,16 +168,25 @@ const Login: React.FunctionComponent<{}> = () => {
                   },
                 ]}
                 onFocus={() => {
-                  onTextPasswordFocus();
+                  setPassWordBorderColor("#E77602");
                 }}
                 onBlur={() => {
-                  onTextPasswordBlur();
+                  setPassWordBorderColor("gray");
                 }}
                 secureTextEntry={true}
+                value={formData.password}
+                onChangeText={(password) => {
+                  setFormData({ ...formData, password: password });
+                }}
+                ref={password_ref}
               />
             </View>
             <View>
-              <TouchableOpacity style={loginScreenStyle.button}>
+              <TouchableOpacity
+                style={loginScreenStyle.button}
+                onPress={() => {
+                  Login();
+                }}>
                 <Text style={loginScreenStyle.buttonText}>Continue</Text>
               </TouchableOpacity>
             </View>

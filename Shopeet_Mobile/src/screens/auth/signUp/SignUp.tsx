@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, ScrollView, TouchableOpacity, Text } from "react-native";
 import { signUpScreenStyle } from "../style";
 import { signUpScreenColors } from "../../../resources/Colors";
@@ -8,6 +8,8 @@ import { useNavigation, StackActions } from "@react-navigation/native";
 import First from "./components/First";
 import Second from "./components/Second";
 import Third from "./components/Third";
+import Message from "../../../components/Message";
+import { UseAuthContext } from "../../../context/Auth/useAuth";
 
 const SignUp: React.FunctionComponent<{}> = () => {
   const navigation: any = useNavigation();
@@ -16,6 +18,34 @@ const SignUp: React.FunctionComponent<{}> = () => {
     signUpScreenColors.form.primary
   );
   const [nxtBtnTxt, setNxtBtnTxt] = useState<string>("Next");
+  const { signUp, msgDetails, isShow, signUpForm } = useContext(UseAuthContext);
+
+  const nextSubmit = () => {
+    if (state === 1) {
+      if (!signUpForm.fullname.trim() || !signUpForm.phone.trim()) {
+        signUp();
+      } else {
+        setState(state + 1);
+        setBgColor(signUpScreenColors.form.tertiary);
+      }
+      return null;
+    } else if (state === 2) {
+      if (!signUpForm.username.trim() || !signUpForm.email.trim()) {
+        signUp();
+      } else {
+        setState(state + 1);
+        setBgColor(signUpScreenColors.form.secondary);
+        setNxtBtnTxt("Submit");
+      }
+    } else if (nxtBtnTxt === "Submit" && state === 3) {
+      if (!signUpForm.password.trim()) {
+        signUp();
+      } else {
+        navigation.dispatch(StackActions.replace("Home", {}));
+      }
+    }
+  };
+
   return (
     <View
       style={[
@@ -38,6 +68,12 @@ const SignUp: React.FunctionComponent<{}> = () => {
           subHeaderText2={""}
           headerTextStyle={signUpScreenStyle.headerText}
           subHeaderTextStyle={signUpScreenStyle.subHeaderText}
+        />
+        <Message
+          msgType={msgDetails.msgType !== "" ? msgDetails.msgType : "danger"}
+          msgText={msgDetails.msgText}
+          animationTimeIn={msgDetails.timeIn}
+          show={isShow}
         />
       </View>
       {/* form view */}
@@ -91,16 +127,7 @@ const SignUp: React.FunctionComponent<{}> = () => {
         <TouchableOpacity
           style={signUpScreenStyle.nextBtn}
           onPress={() => {
-            if (state === 1) {
-              setState(state + 1);
-              setBgColor(signUpScreenColors.form.tertiary);
-            } else if (state === 2) {
-              setState(state + 1);
-              setBgColor(signUpScreenColors.form.secondary);
-              setNxtBtnTxt("Submit");
-            } else if (nxtBtnTxt === "Submit" && state === 3) {
-              console.log("Operation can now be performed");
-            }
+            nextSubmit();
           }}>
           <Text style={signUpScreenStyle.bottomBtnText}>{nxtBtnTxt}</Text>
         </TouchableOpacity>

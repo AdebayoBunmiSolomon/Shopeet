@@ -15,3 +15,19 @@ export interface goBackprops {
   buttonStyle: any;
   iconColor: any;
 }
+
+export interface messageProps {
+  msgType: "warning" | "danger" | "success" | "info";
+  animationTimeIn: number;
+  msgText: string;
+  show: boolean;
+}
+
+export interface bottomTabProps {
+  homeClick: any;
+  searchClick: any;
+  cartClick: any;
+  tagClick: any;
+  userClick: any;
+  state: string;
+}

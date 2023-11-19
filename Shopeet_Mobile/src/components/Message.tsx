@@ -72,7 +72,7 @@ const Message: React.FunctionComponent<messageProps> = ({
         <Animated.View
           style={messageStyle.animatedView}
           entering={ZoomIn.delay(animationTimeIn)}
-          exiting={SlideOutUp}>
+          exiting={SlideOutUp.delay(animationTimeIn)}>
           <View style={messageStyle.msgContainer}>
             <View style={messageStyle.msgContentView}>
               <View

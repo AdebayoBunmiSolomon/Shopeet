@@ -24,10 +24,10 @@ export interface messageProps {
 }
 
 export interface bottomTabProps {
-  homeClick: any;
-  searchClick: any;
-  cartClick: any;
-  tagClick: any;
-  userClick: any;
+  homeClick: () => void;
+  searchClick: () => void;
+  cartClick: () => void;
+  tagClick: () => void;
+  userClick: () => void;
   state: string;
 }

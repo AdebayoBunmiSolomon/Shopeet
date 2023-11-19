@@ -59,28 +59,29 @@ const Login: React.FunctionComponent<{}> = () => {
   //handleLogin
   const Login = () => {
     if (!formData.username.trim()) {
+      timeOutMsg(1500);
       setMsgDetails({
         ...msgDetails,
         msgText: "Username is empty",
         msgType: "danger",
         animationTimeIn: 200,
       });
-      timeOutMsg(1500);
       username_ref.current.focus();
       return null;
     }
     if (!formData.password.trim()) {
+      timeOutMsg(1500);
       setMsgDetails({
         ...msgDetails,
         msgText: "Password is empty",
         msgType: "danger",
         animationTimeIn: 200,
       });
-      timeOutMsg(1500);
       password_ref.current.focus();
       return null;
     } else {
       console.log(formData.username + " " + formData.password);
+      navigation.dispatch(StackActions.replace("Home", {}));
     }
   };
 

@@ -23,11 +23,13 @@ export const messageStyle = StyleSheet.create({
     marginTop: Platform.OS === "android" ? 50 : 60,
   },
   msgContainer: {
-    backgroundColor: "#ebe6e6e6",
+    backgroundColor: "white",
     width: "90%",
     height: 80,
     borderRadius: 15,
     overflow: "hidden",
+    borderWidth: 0.5,
+    borderColor: "gray",
   },
   msgContentView: {
     flexDirection: "row",

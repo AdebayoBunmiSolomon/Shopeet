@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import Screen from "./src/navigations/Screen";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   // FONTS
@@ -18,8 +19,11 @@ export default function App() {
   if (!fontsLoaded && !fontError) return null;
 
   return (
-    <NavigationContainer>
-      <Screen />
-    </NavigationContainer>
+    <>
+      <StatusBar style='dark' />
+      <NavigationContainer>
+        <Screen />
+      </NavigationContainer>
+    </>
   );
 }

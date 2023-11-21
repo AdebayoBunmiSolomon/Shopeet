@@ -53,7 +53,7 @@ export const welcomeScreenStyle = StyleSheet.create({
   loginBtn: {
     backgroundColor: welcomeScreenColors.backGroundColors.buttons.tertiary,
     width: screenWidth - 20,
-    height: 50,
+    height: Platform.OS === "android" ? 50 : 60,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20,
@@ -66,7 +66,7 @@ export const welcomeScreenStyle = StyleSheet.create({
   signUpBtn: {
     backgroundColor: welcomeScreenColors.backGroundColors.buttons.secondary,
     width: screenWidth - 20,
-    height: 50,
+    height: Platform.OS === "android" ? 50 : 60,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20,
@@ -128,7 +128,7 @@ export const loginScreenStyle = StyleSheet.create({
   },
   button: {
     backgroundColor: loginScreenColors.button.backGroundColor.tertiary,
-    height: 50,
+    height: Platform.OS === "android" ? 50 : 60,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20,

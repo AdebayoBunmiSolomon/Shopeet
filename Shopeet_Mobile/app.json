@@ -1,5 +1,11 @@
 {
   "expo": {
+    "infoPlist": {
+      "NSLocationAlwaysAndWhenInUseUsageDescription": "REASON_FOR_REQUEST",
+      "NSLocationWhenInUseUsageDescription": "REASON_FOR_REQUEST",
+      "NSLocationAlwaysUsageDescription": "REASON_FOR_REQUEST",
+      "UIBackgroundModes": ["location", "fetch"]
+    },
     "name": "Shopeet",
     "slug": "Shopeet",
     "version": "1.0.0",
@@ -11,9 +17,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },

@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import Toast from "react-native-toast-message";
 
 export const UseAuthContext = createContext<any>(null);
 
@@ -10,71 +11,46 @@ export const UseAuthContextProvider = (props: any) => {
     email: "",
     password: "",
   });
-  //to clear toast message
-  const [isShow, setIsShow] = useState<boolean>(false);
-  const timeOutMsg = (timeOutVal: number) => {
-    setIsShow(true);
-    const timer = setTimeout(() => {
-      setIsShow(false);
-      clearTimeout(timer);
-    }, timeOutVal);
-  };
-  //msg data state
-  const [msgDetails, setMsgDetails] = useState<any>({
-    msgType: "",
-    animationTimeIn: 0,
-    msgText: "",
-  });
 
   const signUp = () => {
     if (!signUpForm.fullname.trim()) {
-      setMsgDetails({
-        ...msgDetails,
-        msgText: "fullname is empty",
-        msgType: "danger",
-        animationTimeIn: 200,
+      Toast.show({
+        type: "error",
+        text1: "Sign-up error",
+        text2: "Fullname is empty",
       });
-      timeOutMsg(1500);
       return null;
     }
     if (!signUpForm.phone.trim()) {
-      setMsgDetails({
-        ...msgDetails,
-        msgText: "phone number is empty",
-        msgType: "danger",
-        animationTimeIn: 200,
+      Toast.show({
+        type: "error",
+        text1: "Sign-up error",
+        text2: "Phone number is empty",
       });
-      timeOutMsg(1500);
       return null;
     }
     if (!signUpForm.username.trim()) {
-      setMsgDetails({
-        ...msgDetails,
-        msgText: "username is empty",
-        msgType: "danger",
-        animationTimeIn: 200,
+      Toast.show({
+        type: "error",
+        text1: "Sign-up error",
+        text2: "Username is empty",
       });
-      timeOutMsg(1500);
       return null;
     }
     if (!signUpForm.email.trim()) {
-      setMsgDetails({
-        ...msgDetails,
-        msgText: "email is empty",
-        msgType: "danger",
-        animationTimeIn: 200,
+      Toast.show({
+        type: "error",
+        text1: "Sign-up error",
+        text2: "Email is empty",
       });
-      timeOutMsg(1500);
       return null;
     }
     if (!signUpForm.password.trim()) {
-      setMsgDetails({
-        ...msgDetails,
-        msgText: "password is empty",
-        msgType: "danger",
-        animationTimeIn: 200,
+      Toast.show({
+        type: "error",
+        text1: "Sign-up error",
+        text2: "Password is empty",
       });
-      timeOutMsg(1500);
       return null;
     }
   };
@@ -83,10 +59,6 @@ export const UseAuthContextProvider = (props: any) => {
     signUp,
     signUpForm,
     setSignUpForm,
-    isShow,
-    timeOutMsg,
-    msgDetails,
-    setMsgDetails,
   };
 
   return (

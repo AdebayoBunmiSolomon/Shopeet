@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Platform,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import HomeIcon from "react-native-vector-icons/FontAwesome";
 import SearchIcon from "react-native-vector-icons/FontAwesome";
@@ -68,10 +69,10 @@ export default BottomTab;
 
 const bottomTabStyle = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
+    width: Dimensions.get("window").width,
     paddingBottom: Platform.OS === "android" ? 20 : 30,
+    position: "absolute",
+    bottom: 0,
   },
   bottomTabView: {
     flexDirection: "row",
@@ -83,5 +84,6 @@ const bottomTabStyle = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 0.5,
     borderColor: "white",
+    alignSelf: "center",
   },
 });

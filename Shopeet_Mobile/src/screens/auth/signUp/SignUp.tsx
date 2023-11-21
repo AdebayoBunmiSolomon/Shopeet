@@ -8,8 +8,8 @@ import { useNavigation, StackActions } from "@react-navigation/native";
 import First from "./components/First";
 import Second from "./components/Second";
 import Third from "./components/Third";
-import Message from "../../../components/Message";
 import { UseAuthContext } from "../../../context/Auth/useAuth";
+import Toast from "react-native-toast-message";
 
 const SignUp: React.FunctionComponent<{}> = () => {
   const navigation: any = useNavigation();
@@ -69,12 +69,7 @@ const SignUp: React.FunctionComponent<{}> = () => {
           headerTextStyle={signUpScreenStyle.headerText}
           subHeaderTextStyle={signUpScreenStyle.subHeaderText}
         />
-        <Message
-          msgType={msgDetails.msgType !== "" ? msgDetails.msgType : "danger"}
-          msgText={msgDetails.msgText}
-          animationTimeIn={msgDetails.timeIn}
-          show={isShow}
-        />
+        <Toast />
       </View>
       {/* form view */}
       <ScrollView contentContainerStyle={signUpScreenStyle.scrollViewContainer}>

@@ -21,4 +21,5 @@ export const Images = {
       text: "image 4",
     },
   ],
+  welcomeBack: require("../../assets/icons/welcomeBack.png"),
 };

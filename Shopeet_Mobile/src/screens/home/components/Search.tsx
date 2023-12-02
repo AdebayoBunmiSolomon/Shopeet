@@ -12,7 +12,7 @@ import { searchStyle } from "./Style";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
-import { productList } from "../../../resources/Data";
+import { productList } from "../../../resources/utils/Data";
 import Loader from "../../../components/Loader";
 
 const Search: React.FunctionComponent<{}> = () => {

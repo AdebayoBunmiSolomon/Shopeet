@@ -10,7 +10,7 @@ export interface appNameProps {
   color: string;
 }
 
-export interface goBackprops {
+export interface goBackProps {
   onClick: any;
   buttonStyle: any;
   iconColor: any;
@@ -30,4 +30,8 @@ export interface bottomTabProps {
   tagClick: () => void;
   userClick: () => void;
   state: string;
+}
+
+export interface cardProps {
+  data: any;
 }

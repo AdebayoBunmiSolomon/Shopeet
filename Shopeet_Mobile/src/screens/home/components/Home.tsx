@@ -11,10 +11,11 @@ import Carousel from "../../../components/Carousel";
 import LocationIcon from "react-native-vector-icons/Entypo";
 import * as Location from "expo-location";
 import { homePageStyle } from "./Style";
-import { collectionList } from "../../../resources/Data";
+import { collectionList } from "../../../resources/utils/Data";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { Image } from "expo-image";
 import Loader from "../../../components/Loader";
+import Collection from "../../../components/cards/Collection";
 
 const HomePage: React.FunctionComponent<{}> = () => {
   const [locationServiceEnabled, setLocationServiceEnabled] = useState<any>();
@@ -94,7 +95,7 @@ const HomePage: React.FunctionComponent<{}> = () => {
   useEffect(() => {
     CheckIfLocationEnabled();
     loadCollectionList();
-  }, []);
+  }, [locationServiceEnabled]);
 
   return (
     <View>
@@ -115,35 +116,7 @@ const HomePage: React.FunctionComponent<{}> = () => {
       </View>
       {/* Collection list */}
       <View style={homePageStyle.collectionListView}>
-        {isLoading === true ? (
-          <Loader />
-        ) : (
-          <FlatList
-            data={collectionList}
-            keyExtractor={(item: any) => item.id}
-            renderItem={({ item }: any) => (
-              <TouchableOpacity
-                style={[
-                  homePageStyle.collectionListItemBtn,
-                  {
-                    backgroundColor: item.color,
-                  },
-                ]}>
-                <View style={homePageStyle.collectionListItemView}>
-                  <Text style={homePageStyle.collectionListItemText}>
-                    {item.name}
-                  </Text>
-                  <Image
-                    source={item.img}
-                    style={homePageStyle.collectionListItemImage}
-                  />
-                </View>
-              </TouchableOpacity>
-            )}
-            horizontal={false}
-            showsVerticalScrollIndicator={false}
-          />
-        )}
+        {isLoading === true ? <Loader /> : <Collection data={collectionList} />}
       </View>
     </View>
   );

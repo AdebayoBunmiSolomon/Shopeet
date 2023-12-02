@@ -1,9 +1,9 @@
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import BackArrow from "react-native-vector-icons/Ionicons";
-import { goBackprops } from "../interface/AppInterface";
+import { goBackProps } from "../interface/AppInterface";
 
-const GoBack: React.FunctionComponent<goBackprops> = ({
+const GoBack: React.FunctionComponent<goBackProps> = ({
   onClick,
   buttonStyle,
   iconColor,

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { homeScreenStyles } from "./Style";
-import BottomTab from "../../navigations/BottomTab";
-import HomePage from "./components/HomePage";
-import Search from "./components/Search";
-import Cart from "./components/Cart";
-import Tag from "./components/Tag";
-import User from "./components/User";
+import BottomTab from "../../../navigations/BottomTab";
+import HomePage from "../components/Home";
+import Search from "../components/Search";
+import Cart from "../components/Cart";
+import Tag from "../components/Tag";
+import User from "../components/User";
 
-const Home: React.FunctionComponent<{}> = () => {
+const TabRoutes: React.FunctionComponent<{}> = () => {
   const [state, setState] = useState<string>("home");
   return (
     <View style={homeScreenStyles.container}>
@@ -50,4 +50,4 @@ const Home: React.FunctionComponent<{}> = () => {
   );
 };
 
-export default Home;
+export default TabRoutes;

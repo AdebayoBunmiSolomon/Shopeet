@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
-import {
-  Text,
-  View,
-  Platform,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { Images } from "../../../resources/Images";
 import { Image } from "expo-image";
 import { searchStyle } from "./Style";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
-import { productList } from "../../../resources/utils/Data";
+import { productList } from "../../../resources/utils/Product";
 import Loader from "../../../components/Loader";
+import Products from "../../../components/cards/Products";
+import SheetModal from "../../../components/SheetModal";
 
 const Search: React.FunctionComponent<{}> = () => {
   const [productData, setProductData] = useState<any>(null);
   const [dataCount, setDataCount] = useState<number | string>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
 
   const loadProductData = () => {
     setIsLoading(true);
@@ -30,7 +31,7 @@ const Search: React.FunctionComponent<{}> = () => {
       if (products !== null) {
         setDataCount(products.length);
         setProductData(products);
-        setIsLoading(true);
+        setIsLoading(false);
       } else {
         //set data back to null if data not loaded correctly...
         setDataCount("...");
@@ -74,7 +75,11 @@ const Search: React.FunctionComponent<{}> = () => {
           </View>
           {/* filter button beside text input */}
           <View>
-            <TouchableOpacity style={searchStyle.searchFilterBtn}>
+            <TouchableOpacity
+              style={searchStyle.searchFilterBtn}
+              onPress={() => {
+                toggleModal();
+              }}>
               <FontAwesome name='filter' size={25} color={"#FFFFFF"} />
             </TouchableOpacity>
           </View>
@@ -104,14 +109,10 @@ const Search: React.FunctionComponent<{}> = () => {
         </TouchableOpacity>
       </View>
       <View style={searchStyle.productListView}>
-        {!isLoading ? (
-          <View>
-            <Text>You have {dataCount} products</Text>
-          </View>
-        ) : (
-          <Loader />
-        )}
+        {!isLoading ? <Products data={productData} /> : <Loader />}
       </View>
+      {/* collection list modal */}
+      <SheetModal modalVisible={isModalVisible} />
     </View>
   );
 };

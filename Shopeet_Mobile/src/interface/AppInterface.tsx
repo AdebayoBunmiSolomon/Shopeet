@@ -35,3 +35,7 @@ export interface bottomTabProps {
 export interface cardProps {
   data: any;
 }
+
+export interface sheetModalProps {
+  modalVisible: boolean;
+}

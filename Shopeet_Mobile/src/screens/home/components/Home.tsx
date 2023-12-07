@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  Alert,
-  FlatList,
-  TouchableOpacity,
-  ActivityIndicator,
-} from "react-native";
+import { Text, View, Alert } from "react-native";
 import Carousel from "../../../components/Carousel";
 import LocationIcon from "react-native-vector-icons/Entypo";
 import * as Location from "expo-location";
 import { homePageStyle } from "./Style";
-import { collectionList } from "../../../resources/utils/Data";
+import { collectionList } from "../../../resources/utils/Collection";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { Image } from "expo-image";
 import Loader from "../../../components/Loader";
 import Collection from "../../../components/cards/Collection";
 

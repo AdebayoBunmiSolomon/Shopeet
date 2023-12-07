@@ -45,3 +45,39 @@ export const messageStyle = StyleSheet.create({
     paddingLeft: 10,
   },
 });
+
+export const sheetModalStyles = StyleSheet.create({
+  container: {
+    backgroundColor: "#22151850",
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    top: 0,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  contentContainer: {
+    backgroundColor: "white",
+    width: "85%",
+    height: "40%",
+    borderRadius: 20,
+    overflow: "hidden",
+    borderWidth: 0.5,
+    borderColor: "#E77602",
+  },
+  contentTopText: {
+    color: "black",
+    fontSize: Platform.OS === "ios" ? 20 : 18,
+    fontFamily: "RobotoCondensed-Bold",
+    alignSelf: "center",
+  },
+  selectionView: {
+    flexDirection: "column",
+    gap: 15,
+    padding: 10,
+  },
+  collectionListView: {
+    height: "77%",
+  },
+  closeBtnView: {},
+});

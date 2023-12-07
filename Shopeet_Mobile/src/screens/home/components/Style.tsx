@@ -111,7 +111,7 @@ export const searchStyle = StyleSheet.create({
   shopeetTopText: {
     fontFamily: "RobotoCondensed-Bold",
     fontSize: Platform.OS === "android" ? 30 : 35,
-    color: "#E77602",
+    color: "#0B1423",
   },
   shopeetBottomText: {
     fontFamily: "RobotoCondensed-Regular",
@@ -137,7 +137,6 @@ export const searchStyle = StyleSheet.create({
   },
   productListView: {
     height: Platform.OS === "ios" ? "65%" : "63%",
-    justifyContent: "center",
     alignItems: "center",
   },
 });

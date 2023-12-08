@@ -37,5 +37,7 @@ export interface cardProps {
 }
 
 export interface sheetModalProps {
-  modalVisible: boolean;
+  closeBtn: () => void;
+  data: any;
+  setItem: (itemName: string) => void;
 }

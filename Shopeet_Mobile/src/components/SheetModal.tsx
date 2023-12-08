@@ -1,92 +1,76 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { sheetModalProps } from "../interface/AppInterface";
-import { collectionList } from "../resources/utils/Collection";
-import {
-  View,
-  Text,
-  Modal,
-  Platform,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, FlatList, TouchableOpacity, Platform } from "react-native";
 import { sheetModalStyles } from "./Style";
+import AntIcon from "react-native-vector-icons/AntDesign";
 
 const SheetModal: React.FunctionComponent<sheetModalProps> = ({
-  modalVisible,
+  closeBtn,
+  data,
+  setItem,
 }) => {
-  const [collectionData, setCollectionData] = useState<any>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [selectedIndex, setSelectedIndex] = useState<number>();
+  const [selectedItem, setSelectedItem] = useState<string>();
+  const collectionData = data;
 
-  const loadCollectionList = () => {
-    setIsLoading(true);
-
-    const collection = collectionList;
-    try {
-      setIsLoading(true);
-      if (collection !== null) {
-        setCollectionData(collection);
-        setIsLoading(true);
-      } else {
-        setIsLoading(true);
-        setCollectionData(null);
-      }
-    } catch (err) {
-      console.log(err);
-      setIsLoading(true);
-      setCollectionData(null);
-    }
+  const getSelectedItem = (itemName: string, index: number) => {
+    setSelectedIndex(index);
+    setSelectedItem(itemName);
+    setItem(itemName);
+    // console.log(`Selected Index: ${selectedItem}-${selectedIndex}`);
   };
-
-  useEffect(() => {
-    loadCollectionList();
-  }, []);
 
   return (
     <>
-      <Modal
-        animationType='slide'
-        visible={modalVisible}
-        transparent={true}
-        presentationStyle='overFullScreen'>
-        <View style={sheetModalStyles.container}>
-          <View style={sheetModalStyles.contentContainer}>
-            <View style={sheetModalStyles.selectionView}>
-              <Text style={sheetModalStyles.contentTopText}>
-                Select Collection List
-              </Text>
-              <View style={sheetModalStyles.collectionListView}>
-                <FlatList
-                  data={collectionData}
-                  keyExtractor={(item: any) => item.id}
-                  horizontal={false}
-                  renderItem={({ item }: any) => (
-                    <>
-                      <Text>{item.name}</Text>
-                      <Text>{item.name}</Text>
-                    </>
-                  )}
-                />
-              </View>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "flex-end",
-              }}>
-              <TouchableOpacity
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  backgroundColor: "#F01530",
-                  height: Platform.OS === "ios" ? 45 : 40,
-                  marginBottom: -1,
-                }}>
-                <Text>Close</Text>
-              </TouchableOpacity>
+      <View style={sheetModalStyles.container}>
+        <View style={sheetModalStyles.contentContainer}>
+          <View style={sheetModalStyles.selectionView}>
+            <Text style={sheetModalStyles.contentTopText}>
+              Select Collection List
+            </Text>
+            <View style={sheetModalStyles.collectionListView}>
+              <FlatList
+                data={collectionData}
+                keyExtractor={(item: any) => item.id}
+                horizontal={false}
+                renderItem={({ item, index }: any) => (
+                  <TouchableOpacity
+                    style={sheetModalStyles.flatListBtn}
+                    onPress={() => {
+                      getSelectedItem(item.name, index);
+                    }}>
+                    <Text
+                      style={[
+                        sheetModalStyles.flatListText,
+                        {
+                          color:
+                            index === selectedIndex ? "#E77602" : "#3a3c3fc3",
+                        },
+                      ]}>
+                      {item.name}
+                    </Text>
+                    <AntIcon
+                      name={
+                        index === selectedIndex ? "checkcircle" : "checkcircleo"
+                      }
+                      size={Platform.OS === "ios" ? 30 : 25}
+                      color={index === selectedIndex ? "#E77602" : "#3a3c3fc3"}
+                      style={sheetModalStyles.flatListIcon}
+                    />
+                  </TouchableOpacity>
+                )}
+              />
             </View>
           </View>
+          <View style={sheetModalStyles.closeBtnView}>
+            <TouchableOpacity
+              style={sheetModalStyles.closeBtn}
+              onPress={() => closeBtn()}>
+              <Text style={sheetModalStyles.btnText}>Close</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </Modal>
+      </View>
     </>
   );
 };

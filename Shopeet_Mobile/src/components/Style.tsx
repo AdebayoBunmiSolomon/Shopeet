@@ -79,5 +79,30 @@ export const sheetModalStyles = StyleSheet.create({
   collectionListView: {
     height: "77%",
   },
-  closeBtnView: {},
+  closeBtnView: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
+  closeBtn: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F01530",
+    height: Platform.OS === "ios" ? 45 : 40,
+    marginBottom: -1,
+  },
+  btnText: {
+    color: "white",
+    fontFamily: "RobotoCondensed-Bold",
+  },
+  flatListBtn: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  flatListText: {
+    padding: 10,
+    // color: "#3a3c3fc3",
+  },
+  flatListIcon: {
+    padding: 10,
+  },
 });

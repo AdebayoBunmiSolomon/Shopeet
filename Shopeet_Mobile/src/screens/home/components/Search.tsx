@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Text, View, TextInput, TouchableOpacity, Modal } from "react-native";
+import React, { useState, useEffect, useContext } from "react";
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { Images } from "../../../resources/Images";
 import { Image } from "expo-image";
 import { searchStyle } from "./Style";
@@ -7,41 +7,24 @@ import FeatherIcon from "react-native-vector-icons/Feather";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
 import { productList } from "../../../resources/utils/Product";
-import { collectionList } from "../../../resources/utils/Collection";
 import Loader from "../../../components/Loader";
 import Products from "../../../components/cards/Products";
-import SheetModal from "../../../components/SheetModal";
+import { ShopContext } from "../../../context/Auth/shopContext";
+import { useNavigation, StackActions } from "@react-navigation/native";
 
 const Search: React.FunctionComponent<{}> = () => {
+  const { selectedCollection } = useContext(ShopContext);
   const [productData, setProductData] = useState<any>(null);
-  const [collectionData, setCollectionData] = useState<any>();
   const [dataCount, setDataCount] = useState<number | string>();
   const [isProductLoading, setIsProductLoading] = useState<boolean>(true);
-  const [isCollectionLoading, setIsCollectionLoading] = useState<boolean>(true);
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [selectedCollection, setSelectedCollection] =
-    useState<string>("Products");
+  const navigation: any = useNavigation();
 
   const loadCollectionData = () => {
-    setIsModalVisible(!isModalVisible);
-    setIsCollectionLoading(true);
-    //make get request
-    const collection = collectionList;
-    try {
-      //load data after get request is made.
-      setIsCollectionLoading(true);
-      if (collection !== null) {
-        setCollectionData(collection);
-        setIsCollectionLoading(false);
-      } else {
-        //set data back to null if data not loaded correctly...
-        setCollectionData(null);
-        setIsCollectionLoading(true);
-      }
-    } catch (err) {
-      setCollectionData(null);
-      setIsCollectionLoading(true);
-    }
+    navigation.dispatch(
+      StackActions.replace("HomeContext", {
+        screen: "Collection",
+      })
+    );
   };
 
   const loadProductData = () => {
@@ -138,36 +121,6 @@ const Search: React.FunctionComponent<{}> = () => {
       <View style={searchStyle.productListView}>
         {!isProductLoading ? <Products data={productData} /> : <Loader />}
       </View>
-      {/* collection list modal */}
-      <Modal animationType='slide' visible={isModalVisible} transparent={true}>
-        {isCollectionLoading === true ? (
-          <View
-            style={{
-              backgroundColor: "#22151850",
-              position: "absolute",
-              width: "100%",
-              height: "100%",
-              top: 0,
-              justifyContent: "center",
-              alignItems: "center",
-            }}>
-            <Loader />
-          </View>
-        ) : (
-          <SheetModal
-            data={collectionData}
-            closeBtn={() => {
-              setIsModalVisible(!isModalVisible);
-            }}
-            setItem={(itemName: string) => {
-              if (itemName) {
-                // setSelectedCollection(itemName);
-                console.log(itemName);
-              }
-            }}
-          />
-        )}
-      </Modal>
     </View>
   );
 };

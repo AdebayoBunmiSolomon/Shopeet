@@ -2,8 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Welcome from "../screens/auth/Welcome";
 import Login from "../screens/auth/Login";
-import { SignUpContext } from "./ScreenContext";
-import Home from "../screens/home/routes/TabRoutes";
+import { SignUpContext, HomeContext } from "./ScreenContext";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,8 +25,8 @@ const Screen: React.FunctionComponent<{}> = () => {
         }}
       />
       <Stack.Screen
-        name='Home'
-        component={Home}
+        name='HomeContext'
+        component={HomeContext}
         options={{
           animation: "slide_from_right",
         }}

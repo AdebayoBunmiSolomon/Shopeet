@@ -1,24 +1,44 @@
-import React, { useState } from "react";
-import { sheetModalProps } from "../interface/AppInterface";
+import React, { useState, useContext, useEffect } from "react";
 import { View, Text, FlatList, TouchableOpacity, Platform } from "react-native";
 import { sheetModalStyles } from "./Style";
 import AntIcon from "react-native-vector-icons/AntDesign";
+import { ShopContext } from "../context/Auth/shopContext";
+import { StackActions, useNavigation } from "@react-navigation/native";
+import { collectionList } from "../resources/utils/Collection";
 
-const SheetModal: React.FunctionComponent<sheetModalProps> = ({
-  closeBtn,
-  data,
-  setItem,
-}) => {
+const SheetModal: React.FunctionComponent<{}> = ({}) => {
   const [selectedIndex, setSelectedIndex] = useState<number>();
   const [selectedItem, setSelectedItem] = useState<string>();
-  const collectionData = data;
+  const [collectionData, setCollectionData] = useState<any>();
+  const { selectedCollection, getSelectedCollection } = useContext(ShopContext);
+  const navigation: any = useNavigation();
 
   const getSelectedItem = (itemName: string, index: number) => {
     setSelectedIndex(index);
     setSelectedItem(itemName);
-    setItem(itemName);
+    getSelectedCollection(itemName);
     // console.log(`Selected Index: ${selectedItem}-${selectedIndex}`);
   };
+
+  const loadCollectionData = () => {
+    //make get request
+    const collection = collectionList;
+    try {
+      //load data after get request is made.
+      if (collection !== null) {
+        setCollectionData(collection);
+      } else {
+        //set data back to null if data not loaded correctly...
+        setCollectionData(null);
+      }
+    } catch (err) {
+      setCollectionData(null);
+    }
+  };
+
+  useEffect(() => {
+    loadCollectionData();
+  }, []);
 
   return (
     <>
@@ -65,7 +85,13 @@ const SheetModal: React.FunctionComponent<sheetModalProps> = ({
           <View style={sheetModalStyles.closeBtnView}>
             <TouchableOpacity
               style={sheetModalStyles.closeBtn}
-              onPress={() => closeBtn()}>
+              onPress={() => {
+                navigation.dispatch(
+                  StackActions.replace("HomeContext", {
+                    screen: "Home",
+                  })
+                );
+              }}>
               <Text style={sheetModalStyles.btnText}>Close</Text>
             </TouchableOpacity>
           </View>

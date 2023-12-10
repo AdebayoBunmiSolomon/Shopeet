@@ -9,22 +9,18 @@ import Entypo from "react-native-vector-icons/Entypo";
 import { productList } from "../../../resources/utils/Product";
 import Loader from "../../../components/Loader";
 import Products from "../../../components/cards/Products";
+import { useNavigation } from "@react-navigation/native";
 import { ShopContext } from "../../../context/Auth/shopContext";
-import { useNavigation, StackActions } from "@react-navigation/native";
 
 const Search: React.FunctionComponent<{}> = () => {
-  const { selectedCollection } = useContext(ShopContext);
   const [productData, setProductData] = useState<any>(null);
   const [dataCount, setDataCount] = useState<number | string>();
   const [isProductLoading, setIsProductLoading] = useState<boolean>(true);
   const navigation: any = useNavigation();
+  const { selectedCollection } = useContext(ShopContext);
 
-  const loadCollectionData = () => {
-    navigation.dispatch(
-      StackActions.replace("HomeContext", {
-        screen: "Collection",
-      })
-    );
+  const openCollectionModal = () => {
+    navigation.navigate("Collection");
   };
 
   const loadProductData = () => {
@@ -87,7 +83,7 @@ const Search: React.FunctionComponent<{}> = () => {
                 { opacity: isProductLoading === false ? undefined : 0.6 },
               ]}
               onPress={() => {
-                isProductLoading === false ? loadCollectionData() : undefined;
+                isProductLoading === false ? openCollectionModal() : undefined;
               }}
               disabled={isProductLoading === false ? false : true}>
               <FontAwesome name='filter' size={25} color={"#FFFFFF"} />
@@ -118,6 +114,7 @@ const Search: React.FunctionComponent<{}> = () => {
           <Text style={searchStyle.showAllText}>Show all</Text>
         </TouchableOpacity>
       </View>
+      {/* Product card */}
       <View style={searchStyle.productListView}>
         {!isProductLoading ? <Products data={productData} /> : <Loader />}
       </View>

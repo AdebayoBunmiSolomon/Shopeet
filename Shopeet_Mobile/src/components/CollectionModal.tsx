@@ -1,23 +1,23 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, FlatList, TouchableOpacity, Platform } from "react-native";
 import { sheetModalStyles } from "./Style";
 import AntIcon from "react-native-vector-icons/AntDesign";
-import { ShopContext } from "../context/Auth/shopContext";
-import { StackActions, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { collectionList } from "../resources/utils/Collection";
+import { ShopContext } from "../context/Auth/shopContext";
 
 const SheetModal: React.FunctionComponent<{}> = ({}) => {
   const [selectedIndex, setSelectedIndex] = useState<number>();
   const [selectedItem, setSelectedItem] = useState<string>();
   const [collectionData, setCollectionData] = useState<any>();
-  const { selectedCollection, getSelectedCollection } = useContext(ShopContext);
   const navigation: any = useNavigation();
+  const { getSelectedCollection } = useContext(ShopContext);
 
   const getSelectedItem = (itemName: string, index: number) => {
     setSelectedIndex(index);
     setSelectedItem(itemName);
     getSelectedCollection(itemName);
-    // console.log(`Selected Index: ${selectedItem}-${selectedIndex}`);
+    console.log(`Selected Index: ${selectedItem}-${selectedIndex}`);
   };
 
   const loadCollectionData = () => {
@@ -86,11 +86,7 @@ const SheetModal: React.FunctionComponent<{}> = ({}) => {
             <TouchableOpacity
               style={sheetModalStyles.closeBtn}
               onPress={() => {
-                navigation.dispatch(
-                  StackActions.replace("HomeContext", {
-                    screen: "Home",
-                  })
-                );
+                navigation.goBack();
               }}>
               <Text style={sheetModalStyles.btnText}>Close</Text>
             </TouchableOpacity>

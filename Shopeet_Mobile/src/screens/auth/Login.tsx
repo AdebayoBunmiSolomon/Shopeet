@@ -77,11 +77,7 @@ const Login: React.FunctionComponent<{}> = () => {
         text2: "Congratulations",
       });
       console.log(formData.username + " " + formData.password);
-      navigation.dispatch(
-        StackActions.replace("HomeContext", {
-          screen: "Home",
-        })
-      );
+      navigation.dispatch(StackActions.replace("Home", {}));
     }
   };
 

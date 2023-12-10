@@ -4,12 +4,11 @@ export const ShopContext = createContext<any>(null);
 
 export const ShopContextProvider = (props: any) => {
   const [selectedCollection, setSelectedCollection] =
-    useState<string>("Products");
+    useState<string>("Product");
 
   //get the selected collection from the collection modal
   const getSelectedCollection = (itemName: string) => {
     setSelectedCollection(itemName);
-    console.log(selectedCollection);
   };
 
   const contextValue = {

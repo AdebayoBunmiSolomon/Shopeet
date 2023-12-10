@@ -5,12 +5,19 @@ import { Image } from "expo-image";
 import { productListStyle } from "./Style";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { AirbnbRating } from "react-native-ratings";
+import { useNavigation } from "@react-navigation/native";
 
 const Products: React.FunctionComponent<cardProps> = ({ data }) => {
   const productList = data;
+  const navigation: any = useNavigation();
 
   const truncateText = (str: string) => {
     return str.length > 15 ? str.substring(0, 15) + "...." : str;
+  };
+
+  const buyProduct = (productId: number) => {
+    navigation.navigate("ProductInfo", { productId });
+    console.log(productId);
   };
 
   return (
@@ -51,7 +58,11 @@ const Products: React.FunctionComponent<cardProps> = ({ data }) => {
               isDisabled={true}
             />
             <View style={productListStyle.productListBtnView}>
-              <TouchableOpacity style={productListStyle.productListBtn}>
+              <TouchableOpacity
+                style={productListStyle.productListBtn}
+                onPress={() => {
+                  buyProduct(Number(item.id));
+                }}>
                 <Text style={productListStyle.productListBtnText}>Buy</Text>
                 <FontAwesome name='shopping-cart' color={"white"} size={18} />
               </TouchableOpacity>

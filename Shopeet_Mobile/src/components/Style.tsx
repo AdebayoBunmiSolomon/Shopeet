@@ -106,3 +106,16 @@ export const sheetModalStyles = StyleSheet.create({
     padding: 10,
   },
 });
+
+export const indicatorsStyle = StyleSheet.create({
+  indicatorListView: {
+    width: 10,
+    height: 10,
+    borderRadius: 50,
+    borderWidth: 0.5,
+    borderColor: "whitesmoke",
+  },
+  indicatorText: {
+    opacity: 0.0,
+  },
+});

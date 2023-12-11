@@ -61,8 +61,8 @@ export const productList = [
     },
     {
       id: 7,
-      name: "FURGLE Chair ",
-      about:"Custom Home & Studio Ergonomic Gaming Chair",
+      name: "FURGLE Chair For Gaming & Programming",
+      about:"Custom Home & Studio Ergonomic Gaming Chair used as relaxation and as well for programming which enhances the easiness of work.",
       description: "Features: one-piece high-density foam: high pressure resistance, strong elasticity and enhanced comfort High quality PU leather: wear resistant, breathable, easy to clean Increase the detachable headrest lumbar pillow: relieve fatigue and protect the neck and spine Tilt Locking mechanism 90-180 degrees angle adjuster",
       rating: 2,
       price: 185000,

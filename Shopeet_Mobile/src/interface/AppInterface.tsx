@@ -36,7 +36,7 @@ export interface cardProps {
   data: any;
 }
 
-export interface sheetModalProps {
-  closeBtn: () => void;
-  data: any;
+export interface indicatorsProps {
+  imgData: any;
+  index: number;
 }

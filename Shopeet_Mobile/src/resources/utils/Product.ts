@@ -5,7 +5,7 @@ export const productList = [
       about:"Jeans is used for covering the legs",
       description: "A style of jeans created for men and the general traits of their anatomy.This generally means that they are looser fitting and have more depth within the crotch.",
       rating: 5,
-      price: 5000,
+      price: 500,
       categoryId: 1,
       image: "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/80/0337112/1.jpg?0462"
     },

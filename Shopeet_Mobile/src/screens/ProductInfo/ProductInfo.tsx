@@ -7,15 +7,15 @@ import {
   Platform,
 } from "react-native";
 import { productInfoStyle } from "./Style";
-import { productList } from "../resources/utils/Product";
+import { productList } from "../../resources/utils/Product";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
 import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
-import GoBack from "../components/GoBack";
-import Loader from "../components/Loader";
-import { productImageList } from "../resources/utils/ProductImage";
-import Indicators from "../components/Indicators";
+import GoBack from "../../components/GoBack";
+import Loader from "../../components/Loader";
+import { productImageList } from "../../resources/utils/ProductImage";
+import Indicators from "../../components/Indicators";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
 const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
@@ -29,6 +29,14 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
 
   const changeLikeActivity = () => {
     setLikeActive(!likeActive);
+  };
+
+  const formatProductPrice = (price: number) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  const productReview = () => {
+    navigation.navigate("ProductReview", { productId });
   };
 
   const loadProductInfo = () => {
@@ -106,7 +114,9 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
           <Text style={productInfoStyle.topText}>Product information</Text>
         </View>
         {/* product information */}
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          showsVerticalScrollIndicator={false}>
           {isLoading === true ? (
             <View style={productInfoStyle.loaderView}>
               <Loader />
@@ -204,31 +214,16 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
                   </View>
                   <View>
                     <Text style={productInfoStyle.productPrice}>
-                      ${productInfo[0].price}
+                      ${formatProductPrice(productInfo[0].price)}
                     </Text>
                   </View>
                 </View>
+                {/* description */}
                 <View>
-                  <Text
-                    style={{
-                      fontSize: Platform.OS === "ios" ? 25 : 20,
-                      width: "97%",
-                      paddingTop: 10,
-                      fontFamily: "RobotoCondensed-Bold",
-                      color: "#221518",
-                    }}>
+                  <Text style={productInfoStyle.productDescription}>
                     Description
                   </Text>
-                  <Text
-                    style={{
-                      fontFamily: "RobotoCondensed-Regular",
-                      fontSize: Platform.OS === "ios" ? 18 : 15,
-                      width: "97%",
-                      paddingTop: 10,
-                      color: "#3a3c3fc3",
-                      textAlign: "justify",
-                      paddingBottom: 10,
-                    }}>
+                  <Text style={productInfoStyle.productDescriptionText}>
                     {productInfo[0].description}
                   </Text>
                 </View>
@@ -237,47 +232,24 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
           )}
         </ScrollView>
       </View>
-      <View
-        style={{
-          position: "absolute",
-          backgroundColor: "red",
-          flexDirection: "column",
-          alignSelf: "flex-end",
-          justifyContent: "flex-end",
-        }}>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "white",
-            width: 50,
-            paddingTop: 10,
-            paddingBottom: 10,
-            borderRadius: 50,
-            paddingHorizontal: 12,
-          }}>
+      {/* product review button */}
+      <View style={productInfoStyle.reviewBtnView}>
+        <TouchableOpacity style={productInfoStyle.reviewBtn}>
           <AntDesign name='message1' size={25} color={"#E77602"} />
         </TouchableOpacity>
       </View>
-      <View style={{ paddingBottom: 10 }}>
+      <View style={productInfoStyle.bottomBtnView}>
+        {/* check reviews */}
         <TouchableOpacity
-          style={{
-            backgroundColor: "#E77602",
-            width: "97%",
-            alignSelf: "center",
-            height: Platform.OS === "android" ? 50 : 60,
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 20,
-            borderWidth: 0.5,
-            borderColor: "white",
+          style={productInfoStyle.checkReviewsBtn}
+          onPress={() => {
+            productReview();
           }}>
-          <Text
-            style={{
-              color: "white",
-              fontFamily: "RobotoCondensed-Bold",
-              fontSize: Platform.OS === "ios" ? 18 : 15,
-            }}>
-            Add to cart
-          </Text>
+          <Text style={productInfoStyle.bottomBtnText}>Check review</Text>
+        </TouchableOpacity>
+        {/* add to cart */}
+        <TouchableOpacity style={productInfoStyle.addToCartBtn}>
+          <Text style={productInfoStyle.bottomBtnText}>Add to cart</Text>
         </TouchableOpacity>
       </View>
     </>

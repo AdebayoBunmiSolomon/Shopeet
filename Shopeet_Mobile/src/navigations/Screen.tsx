@@ -5,8 +5,9 @@ import Login from "../screens/auth/Login";
 import { SignUpContext } from "./SignUpNavigationContext";
 import SheetModal from "../components/CollectionModal";
 import Home from "../screens/home/routes/TabRoutes";
-import ProductInfo from "../screens/ProductInfo";
+import ProductInfo from "../screens/ProductInfo/ProductInfo";
 import { ShopContextProvider } from "../context/Auth/shopContext";
+import ProductReview from "../screens/ProductInfo/ProductReview";
 
 const Stack = createNativeStackNavigator();
 const Modal = createNativeStackNavigator();
@@ -52,6 +53,15 @@ const Screen: React.FunctionComponent<{}> = () => {
             <Modal.Screen
               name='Collection'
               component={SheetModal}
+              options={{
+                presentation: "transparentModal",
+                animation: "slide_from_bottom",
+                animationDuration: 100,
+              }}
+            />
+            <Modal.Screen
+              name='ProductReview'
+              component={ProductReview}
               options={{
                 presentation: "transparentModal",
                 animation: "slide_from_bottom",

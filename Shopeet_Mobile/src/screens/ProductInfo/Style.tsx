@@ -197,4 +197,52 @@ export const productReviewStyle = StyleSheet.create({
     paddingLeft: 10,
     color: "white",
   },
+  loadingView: {
+    width: "97%",
+    height: "82%",
+    alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  loadingText: {
+    fontFamily: "RobotoCondensed-Bold",
+    fontSize: Platform.OS === "ios" ? 20 : 17,
+    color: "white",
+  },
+  reviewContainer: {
+    width: "97%",
+    alignSelf: "center",
+    paddingLeft: 5,
+    flexDirection: "column",
+    gap: 20,
+    overflow: "scroll",
+    flexGrow: 1,
+  },
+  reviewCustomerName: {
+    textAlign: "justify",
+    color: "white",
+    opacity: 0.8,
+  },
+  reviewReview: {
+    textAlign: "justify",
+    color: "#3a3c3fc3",
+    opacity: 0.9,
+    paddingTop: 5,
+  },
+  reviewDivider: {
+    borderBottomWidth: 0.5,
+    paddingTop: 5,
+    borderColor: "white",
+  },
+  noReviewContainer: {
+    width: "99%",
+    height: "85%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  noReviewText: {
+    color: "white",
+    fontFamily: "RobotoCondensed-Bold",
+    fontSize: Platform.OS === "ios" ? 20 : 17,
+  },
 });

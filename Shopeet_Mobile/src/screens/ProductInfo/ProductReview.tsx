@@ -59,64 +59,33 @@ const ProductReview: React.FunctionComponent<{}> = (props: any) => {
             </Text>
           </View>
           {isLoading === true ? (
-            <View
-              style={{
-                width: "97%",
-                height: "82%",
-                alignSelf: "center",
-                justifyContent: "center",
-                alignItems: "center",
-              }}>
-              <Text
-                style={{
-                  fontFamily: "RobotoCondensed-Bold",
-                  fontSize: Platform.OS === "ios" ? 20 : 17,
-                  color: "white",
-                }}>
-                loading...
-              </Text>
+            <View style={productReviewStyle.loadingView}>
+              <Text style={productReviewStyle.loadingText}>loading...</Text>
             </View>
           ) : (
             <View style={{ height: "82%" }}>
               <ScrollView
-                contentContainerStyle={{
-                  width: "97%",
-                  alignSelf: "center",
-                  paddingLeft: 5,
-                  flexDirection: "column",
-                  gap: 20,
-                  overflow: "scroll",
-                  flexGrow: 1,
-                }}
+                contentContainerStyle={productReviewStyle.reviewContainer}
                 showsVerticalScrollIndicator={false}>
-                {prodReview &&
+                {prodReview && prodReview.length > 0 ? (
                   prodReview.map((review: any, index: number) => (
                     <View key={index}>
-                      <Text
-                        style={{
-                          textAlign: "justify",
-                          color: "white",
-                          opacity: 0.8,
-                        }}>
+                      <Text style={productReviewStyle.reviewCustomerName}>
                         {review.customerName}:
                       </Text>
-                      <Text
-                        style={{
-                          textAlign: "justify",
-                          color: "#3a3c3fc3",
-                          opacity: 0.9,
-                          paddingTop: 5,
-                        }}>
+                      <Text style={productReviewStyle.reviewReview}>
                         {review.review}
                       </Text>
-                      <View
-                        style={{
-                          borderBottomWidth: 0.5,
-                          paddingTop: 5,
-                          borderColor: "white",
-                        }}></View>
+                      <View style={productReviewStyle.reviewDivider}></View>
                     </View>
-                  ))}
+                  ))
+                ) : (
+                  <View style={productReviewStyle.noReviewContainer}>
+                    <Text style={productReviewStyle.noReviewText}>
+                      This product has no review(s)
+                    </Text>
+                  </View>
+                )}
               </ScrollView>
             </View>
           )}

@@ -40,3 +40,7 @@ export interface indicatorsProps {
   imgData: any;
   index: number;
 }
+
+export interface cartIconProps {
+  onNavigate: () => void;
+}

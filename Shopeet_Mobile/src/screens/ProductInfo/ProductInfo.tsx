@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -17,6 +17,10 @@ import Loader from "../../components/Loader";
 import { productImageList } from "../../resources/utils/ProductImage";
 import Indicators from "../../components/Indicators";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import PostReview from "./PostReview";
+import CartIcon from "../../components/CartIcon";
+import { ShopContext } from "../../context/Auth/shopContext";
+import Toast from "react-native-toast-message";
 
 const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
   const { productId } = props.route.params;
@@ -26,9 +30,15 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
   const [likeActive, setLikeActive] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [initialIndex, setInitialIndex] = useState<number>(0);
+  const [openReview, setOpenReview] = useState<boolean>(false);
+  const { addToCart } = useContext(ShopContext);
 
   const changeLikeActivity = () => {
     setLikeActive(!likeActive);
+  };
+
+  const showReview = () => {
+    setOpenReview(!openReview);
   };
 
   const formatProductPrice = (price: number) => {
@@ -37,6 +47,10 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
 
   const productReview = () => {
     navigation.navigate("ProductReview", { productId });
+  };
+
+  const cartModal = () => {
+    navigation.navigate("CartModal");
   };
 
   const loadProductInfo = () => {
@@ -102,16 +116,28 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
   }, [productId]);
   return (
     <>
+      <View style={{ zIndex: 1 }}>
+        <Toast />
+      </View>
       <View style={productInfoStyle.container}>
         <View style={productInfoStyle.navigationView}>
-          <GoBack
-            onClick={() => {
-              navigation.goBack();
-            }}
-            buttonStyle={undefined}
-            iconColor={"#221518"}
-          />
-          <Text style={productInfoStyle.topText}>Product information</Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <GoBack
+              onClick={() => {
+                navigation.goBack();
+              }}
+              buttonStyle={undefined}
+              iconColor={"#221518"}
+            />
+            <Text style={productInfoStyle.topText}>Product information</Text>
+          </View>
+          <View>
+            <CartIcon
+              onNavigate={() => {
+                cartModal();
+              }}
+            />
+          </View>
         </View>
         {/* product information */}
         <ScrollView
@@ -233,8 +259,13 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
         </ScrollView>
       </View>
       {/* product review button */}
+      {openReview === true ? <PostReview /> : null}
       <View style={productInfoStyle.reviewBtnView}>
-        <TouchableOpacity style={productInfoStyle.reviewBtn}>
+        <TouchableOpacity
+          style={productInfoStyle.reviewBtn}
+          onPress={() => {
+            showReview();
+          }}>
           <AntDesign name='message1' size={25} color={"#E77602"} />
         </TouchableOpacity>
       </View>
@@ -248,7 +279,11 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
           <Text style={productInfoStyle.bottomBtnText}>Check review</Text>
         </TouchableOpacity>
         {/* add to cart */}
-        <TouchableOpacity style={productInfoStyle.addToCartBtn}>
+        <TouchableOpacity
+          style={productInfoStyle.addToCartBtn}
+          onPress={() => {
+            addToCart(productId, 1);
+          }}>
           <Text style={productInfoStyle.bottomBtnText}>Add to cart</Text>
         </TouchableOpacity>
       </View>

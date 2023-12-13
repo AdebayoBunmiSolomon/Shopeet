@@ -10,7 +10,8 @@ export const productInfoStyle = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingBottom: 10,
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
+    paddingRight: 12,
   },
   topText: {
     fontFamily: "RobotoCondensed-Bold",
@@ -244,5 +245,130 @@ export const productReviewStyle = StyleSheet.create({
     color: "white",
     fontFamily: "RobotoCondensed-Bold",
     fontSize: Platform.OS === "ios" ? 20 : 17,
+  },
+});
+
+export const postReviewStyle = StyleSheet.create({
+  container: {
+    position: "absolute",
+    bottom: 150,
+    right: 20,
+  },
+  textInput: {
+    backgroundColor: "white",
+    width: 300,
+    height: 100,
+    borderRadius: 10,
+    paddingLeft: 5,
+    borderWidth: 1,
+    borderColor: "black",
+  },
+});
+
+export const cartModalStyles = StyleSheet.create({
+  container: {
+    backgroundColor: "#22151850",
+    width: "100%",
+    height: "100%",
+    top: 0,
+    position: "absolute",
+    justifyContent: "flex-end",
+  },
+  sheetModal: {
+    backgroundColor: "#FFFFFF",
+    width: "100%",
+    height: "45%",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    overflow: "hidden",
+  },
+  sheetModalTopContentView: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    padding: 10,
+  },
+  sheetModalTopContentText: {
+    fontFamily: "RobotoCondensed-Bold",
+    fontSize: Platform.OS === "ios" ? 20 : 17,
+    paddingLeft: 10,
+    color: "#E77602",
+  },
+  cartContainer: {
+    width: "97%",
+    alignSelf: "center",
+    paddingLeft: 5,
+    flexDirection: "column",
+    gap: 20,
+    overflow: "scroll",
+    flexGrow: 1,
+  },
+  loadingView: {
+    width: "97%",
+    height: "82%",
+    alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  loadingText: {
+    fontFamily: "RobotoCondensed-Bold",
+    fontSize: Platform.OS === "ios" ? 20 : 17,
+    color: "#E77602",
+  },
+  noCartContainer: {
+    width: "99%",
+    height: "85%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  noCartText: {
+    color: "#E77602",
+    fontFamily: "RobotoCondensed-Bold",
+    fontSize: Platform.OS === "ios" ? 20 : 17,
+  },
+  listContainer: {
+    backgroundColor: "whitesmoke",
+    borderRadius: 15,
+    overflow: "hidden",
+    flexDirection: "row",
+  },
+  listImage: {
+    width: 120,
+    height: 90,
+    marginRight: 5,
+    borderBottomLeftRadius: 15,
+    borderTopLeftRadius: 15,
+  },
+  listContentContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "65%",
+  },
+  listContentView: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+  listContentMinusBtn: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 30,
+    height: 30,
+    borderRadius: 50,
+    backgroundColor: "#F01530",
+  },
+  listContentPlusBtn: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 30,
+    height: 30,
+    borderRadius: 50,
+    backgroundColor: "#E77602",
+  },
+  listContentPrice: {
+    fontFamily: "RobotoCondensed-Bold",
+    fontSize: Platform.OS === "ios" ? 20 : 18,
+    color: "#E77602",
   },
 });

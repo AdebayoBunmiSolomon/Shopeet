@@ -119,3 +119,23 @@ export const indicatorsStyle = StyleSheet.create({
     opacity: 0.0,
   },
 });
+
+export const cartIconStyles = StyleSheet.create({
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cartCount: {
+    position: "absolute",
+    color: "white",
+    zIndex: 1,
+    fontFamily: "RobotoCondensed-Bold",
+    fontSize: Platform.OS === "ios" ? 15 : 13,
+    backgroundColor: "#F01530",
+    paddingHorizontal: 7,
+    paddingVertical: 1,
+    borderRadius: 50,
+    marginTop: -10,
+    marginLeft: -5,
+  },
+});

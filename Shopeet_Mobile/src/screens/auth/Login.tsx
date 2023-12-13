@@ -18,7 +18,6 @@ import { loginScreenColors } from "../../resources/Colors";
 import { StackActions, useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 import { Image } from "expo-image";
-// import Message from "../../components/Message";
 
 const Login: React.FunctionComponent<{}> = () => {
   const navigation: any = useNavigation();

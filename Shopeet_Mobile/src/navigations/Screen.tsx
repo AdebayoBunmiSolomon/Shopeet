@@ -8,6 +8,7 @@ import Home from "../screens/home/routes/TabRoutes";
 import ProductInfo from "../screens/ProductInfo/ProductInfo";
 import { ShopContextProvider } from "../context/Auth/shopContext";
 import ProductReview from "../screens/ProductInfo/ProductReview";
+import CartModal from "../screens/ProductInfo/CartModal";
 
 const Stack = createNativeStackNavigator();
 const Modal = createNativeStackNavigator();
@@ -62,6 +63,15 @@ const Screen: React.FunctionComponent<{}> = () => {
             <Modal.Screen
               name='ProductReview'
               component={ProductReview}
+              options={{
+                presentation: "transparentModal",
+                animation: "slide_from_bottom",
+                animationDuration: 100,
+              }}
+            />
+            <Modal.Screen
+              name='CartModal'
+              component={CartModal}
               options={{
                 presentation: "transparentModal",
                 animation: "slide_from_bottom",

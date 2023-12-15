@@ -1,6 +1,16 @@
 import React, { createContext, useState } from "react";
-import { cartList } from "../../resources/utils/Cart";
 import Toast from "react-native-toast-message";
+
+//empty customer cart
+const customerBasket = [
+  {
+    customerId: 0,
+    productId: 0,
+    image: "",
+    price: 0,
+    countOfProd: 0,
+  },
+];
 
 export const ShopContext = createContext<any>(null);
 
@@ -8,81 +18,99 @@ export const ShopContextProvider = (props: any) => {
   const [selectedCollection, setSelectedCollection] =
     useState<string>("Product");
   const [customerCart, setCustomerCart] = useState<any>();
-  const [cartLoading, setCartLoading] = useState<boolean>(true);
-  const [countOfCartItems, setCountOfCartItem] = useState<number | null>(0);
-  const [checkCart, setCheckCart] = useState<boolean>(false);
+  const [customerCartLength, setCustomerCartLength] = useState<any>(0);
+  const [addToCartLoading, setAddToCartLoading] = useState<boolean>(false);
 
   //get the selected collection from the collection modal
   const getSelectedCollection = (itemName: string) => {
     setSelectedCollection(itemName);
   };
 
-  const addToCart = (gottenProdId: number, customerId: number) => {
-    const productList = cartList.filter(
-      (cart: any) =>
-        cart.productId === gottenProdId && cart.customerId === customerId
-    );
-    if (productList.length > 0) {
-      Toast.show({
-        type: "info",
-        text1: "Cart Information",
-        text2: "Product already added to cart",
+  //add particular product to cart
+  const addToCart = (
+    gottenProdId: number,
+    gottenCustomerId: number,
+    gottenImage: string,
+    gottenPrice: number,
+    countOfProd: number
+  ) => {
+    if (customerBasket && customerBasket.length > 0) {
+      const product = customerBasket.filter(
+        (prodItem: any) => prodItem.productId === gottenProdId
+      );
+      if (product && product.length > 0) {
+        Toast.show({
+          type: "info",
+          text1: "Cart Information",
+          text2: "cart updated successfully",
+        });
+      } else {
+        pushProductToBasket(
+          gottenCustomerId,
+          gottenProdId,
+          gottenImage,
+          gottenPrice,
+          countOfProd
+        );
+        Toast.show({
+          type: "success",
+          text1: "Cart Information",
+          text2: "product added successfully",
+        });
+      }
+    }
+    setCustomerCart(customerBasket);
+    getLengthOfCustomerCart(gottenCustomerId);
+  };
+
+  //push product to basket
+  const pushProductToBasket = (
+    gottenCustomerId: number,
+    gottenProdId: number,
+    gottenImage: string,
+    gottenPrice: number,
+    countOfProd: number
+  ) => {
+    try {
+      customerBasket.push({
+        customerId: gottenCustomerId,
+        productId: gottenProdId,
+        image: gottenImage,
+        price: gottenPrice,
+        countOfProd: countOfProd,
       });
-      setCheckCart(!checkCart);
-    } else {
-      setCheckCart(!checkCart);
+    } catch (err) {
+      console.log(err);
     }
   };
 
-  const getCountOfCartItems = () => {
-    const countOfItemsInCart: number = cartList.filter(
-      (cart: any) => cart.customerId === 1
-    ).length;
+  //get length of customer product in cart
+  const getLengthOfCustomerCart = (gottenCustomerId: number) => {
+    setAddToCartLoading(true);
     try {
-      if (countOfItemsInCart !== null) {
-        setCountOfCartItem(countOfItemsInCart);
+      setAddToCartLoading(true);
+      if (customerCart && customerCart.length > 0) {
+        const cartLength = customerCart.filter(
+          (cartItems: any) => cartItems.customerId === gottenCustomerId
+        ).length;
+        setCustomerCartLength(cartLength);
+        setAddToCartLoading(false);
       } else {
-        console.log(0);
-        setCountOfCartItem(0);
+        setAddToCartLoading(false);
       }
     } catch (err) {
       console.log(err);
-      setCountOfCartItem(0);
-    }
-  };
-
-  const getCustomerCart = () => {
-    setCartLoading(true);
-
-    const customerCartList = cartList.filter(
-      (cart: any) => cart.customerId === 1
-    );
-    try {
-      setCartLoading(true);
-      if (customerCartList !== null) {
-        setCustomerCart(customerCartList);
-        setCartLoading(false);
-      } else {
-        setCustomerCart(null);
-        setCartLoading(true);
-      }
-    } catch (err) {
-      console.log(err);
-      setCustomerCart(null);
-      setCartLoading(true);
     }
   };
 
   const contextValue = {
     selectedCollection,
     getSelectedCollection,
-    customerCart,
-    cartLoading,
-    getCustomerCart,
-    countOfCartItems,
-    getCountOfCartItems,
     addToCart,
-    checkCart,
+    customerCartLength,
+    getLengthOfCustomerCart,
+    customerCart,
+    addToCartLoading,
   };
 
   return (

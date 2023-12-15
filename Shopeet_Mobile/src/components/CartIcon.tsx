@@ -5,12 +5,16 @@ import { cartIconStyles } from "./Style";
 import { cartIconProps } from "../interface/AppInterface";
 import { ShopContext } from "../context/Auth/shopContext";
 
-const CartIcon: React.FunctionComponent<cartIconProps> = ({ onNavigate }) => {
-  const { countOfCartItems, getCountOfCartItems } = useContext(ShopContext);
+const CartIcon: React.FunctionComponent<cartIconProps> = ({
+  onNavigate,
+  customerId,
+}) => {
+  const { customerCartLength, getLengthOfCustomerCart, customerCart } =
+    useContext(ShopContext);
 
   useEffect(() => {
-    getCountOfCartItems();
-  }, []);
+    getLengthOfCustomerCart(customerId);
+  }, [customerCart]);
   return (
     <>
       <View>
@@ -20,7 +24,11 @@ const CartIcon: React.FunctionComponent<cartIconProps> = ({ onNavigate }) => {
             onNavigate();
           }}>
           <View style={{ flexDirection: "row" }}>
-            <Text style={cartIconStyles.cartCount}>{countOfCartItems}</Text>
+            <View style={cartIconStyles.cartCountView}>
+              <Text style={cartIconStyles.cartCountText}>
+                {customerCartLength}
+              </Text>
+            </View>
             <FontAwesome
               name='shopping-cart'
               size={Platform.OS === "ios" ? 35 : 30}

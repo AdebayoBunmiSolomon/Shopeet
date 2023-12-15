@@ -31,8 +31,10 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [initialIndex, setInitialIndex] = useState<number>(0);
   const [openReview, setOpenReview] = useState<boolean>(false);
-  const { addToCart } = useContext(ShopContext);
-
+  const [countOfSpecificProdInCart, setCountOfSpecificProdInCart] =
+    useState<number>(1);
+  const { addToCart, customerCart, addToCartLoading } = useContext(ShopContext);
+  let [newProdPrice, setNewProdPrice] = useState<any>();
   const changeLikeActivity = () => {
     setLikeActive(!likeActive);
   };
@@ -53,6 +55,35 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
     navigation.navigate("CartModal");
   };
 
+  //get count of specific product in cart
+  const loadCountOfSpecificProductInCart = (
+    gottenProdId: number,
+    gottenCustomerId: number
+  ) => {
+    if (customerCart && customerCart.length > 0) {
+      const countOfSpecificProductInCart: any = customerCart.filter(
+        (specificProduct: any) =>
+          specificProduct.productId === gottenProdId &&
+          specificProduct.customerId === gottenCustomerId
+      );
+      try {
+        if (countOfSpecificProductInCart !== null) {
+          console.log(countOfSpecificProductInCart[0].countOfProd);
+          setCountOfSpecificProdInCart(
+            countOfSpecificProductInCart[0].countOfProd
+          );
+        } else {
+          console.log("this product does not exist in cart");
+          setCountOfSpecificProdInCart(1);
+        }
+      } catch (err) {
+        console.log(err);
+        setCountOfSpecificProdInCart(1);
+      }
+    }
+  };
+
+  //load product information
   const loadProductInfo = () => {
     setIsLoading(true);
     //make get request
@@ -65,6 +96,7 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
       if (productInfo !== null) {
         setProductInfo(productInfo);
         loadProductImage(productId);
+        loadCountOfSpecificProductInCart(productId, 1);
         setIsLoading(false);
       } else {
         //set data back to null if data not loaded correctly...
@@ -136,6 +168,7 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
               onNavigate={() => {
                 cartModal();
               }}
+              customerId={1}
             />
           </View>
         </View>
@@ -209,6 +242,52 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
                   </View>
                 </View>
               </View>
+              {/* add to product count */}
+              <View style={productInfoStyle.plusBtnView}>
+                <View
+                  style={{
+                    backgroundColor: "#E77602",
+                    width: 100,
+                    height: 40,
+                    borderRadius: 10,
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                  }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      if (countOfSpecificProdInCart > 1) {
+                        setCountOfSpecificProdInCart(
+                          countOfSpecificProdInCart - 1
+                        );
+                        // getNewProdPrice(productInfo[0].price);
+                      } else {
+                        //nothing should happen
+                      }
+                    }}>
+                    <FontAwesome
+                      name='minus'
+                      size={Platform.OS === "ios" ? 18 : 16}
+                      color={"#FFFFFF"}
+                    />
+                  </TouchableOpacity>
+                  <Text style={productInfoStyle.countText}>
+                    {countOfSpecificProdInCart}
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setCountOfSpecificProdInCart(
+                        countOfSpecificProdInCart + 1
+                      );
+                    }}>
+                    <FontAwesome
+                      name='plus'
+                      size={Platform.OS === "ios" ? 18 : 16}
+                      color={"#FFFFFF"}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
               {/* other product details */}
               <View style={{ flexDirection: "column", gap: 10 }}>
                 {/* name & desc */}
@@ -240,7 +319,10 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
                   </View>
                   <View>
                     <Text style={productInfoStyle.productPrice}>
-                      ${formatProductPrice(productInfo[0].price)}
+                      $
+                      {!newProdPrice
+                        ? formatProductPrice(productInfo[0].price)
+                        : formatProductPrice(newProdPrice)}
                     </Text>
                   </View>
                 </View>
@@ -282,9 +364,19 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
         <TouchableOpacity
           style={productInfoStyle.addToCartBtn}
           onPress={() => {
-            addToCart(productId, 1);
+            addToCart(
+              productId,
+              1,
+              prodImgList[0].image,
+              !newProdPrice ? productInfo[0].price : newProdPrice,
+              countOfSpecificProdInCart
+            );
           }}>
-          <Text style={productInfoStyle.bottomBtnText}>Add to cart</Text>
+          {addToCartLoading === true ? (
+            <Text style={productInfoStyle.bottomBtnText}>Loading</Text>
+          ) : (
+            <Text style={productInfoStyle.bottomBtnText}>Add to cart</Text>
+          )}
         </TouchableOpacity>
       </View>
     </>

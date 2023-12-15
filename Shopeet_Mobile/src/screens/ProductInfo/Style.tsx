@@ -136,9 +136,9 @@ export const productInfoStyle = StyleSheet.create({
     borderColor: "white",
   },
   bottomBtnView: {
-    paddingBottom: 10,
+    paddingBottom: Platform.OS === "ios" ? 30 : 15,
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
   },
   bottomBtnText: {
     color: "white",
@@ -147,7 +147,7 @@ export const productInfoStyle = StyleSheet.create({
   },
   addToCartBtn: {
     backgroundColor: "#E77602",
-    width: "48%",
+    width: "40%",
     alignSelf: "center",
     height: Platform.OS === "android" ? 50 : 60,
     justifyContent: "center",
@@ -158,7 +158,7 @@ export const productInfoStyle = StyleSheet.create({
   },
   checkReviewsBtn: {
     backgroundColor: "#221518",
-    width: "48%",
+    width: "40%",
     alignSelf: "center",
     height: Platform.OS === "android" ? 50 : 60,
     justifyContent: "center",
@@ -166,6 +166,18 @@ export const productInfoStyle = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 0.5,
     borderColor: "white",
+  },
+  plusBtnView: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    zIndex: 1,
+    marginTop: -20,
+    marginRight: 10,
+  },
+  countText: {
+    color: "white",
+    fontFamily: "RobotoCondensed-Bold",
+    fontSize: Platform.OS === "ios" ? 20 : 18,
   },
 });
 

@@ -125,17 +125,19 @@ export const cartIconStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  cartCount: {
+  cartCountView: {
     position: "absolute",
-    color: "white",
     zIndex: 1,
-    fontFamily: "RobotoCondensed-Bold",
-    fontSize: Platform.OS === "ios" ? 15 : 13,
     backgroundColor: "#F01530",
-    paddingHorizontal: 7,
-    paddingVertical: 1,
-    borderRadius: 50,
+    borderRadius: Platform.OS === "ios" ? 60 : 50,
     marginTop: -10,
     marginLeft: -5,
+  },
+  cartCountText: {
+    color: "white",
+    paddingHorizontal: 7,
+    paddingVertical: 1,
+    fontFamily: "RobotoCondensed-Bold",
+    fontSize: Platform.OS === "ios" ? 20 : 13,
   },
 });

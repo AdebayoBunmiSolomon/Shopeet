@@ -43,4 +43,5 @@ export interface indicatorsProps {
 
 export interface cartIconProps {
   onNavigate: () => void;
+  customerId: number;
 }

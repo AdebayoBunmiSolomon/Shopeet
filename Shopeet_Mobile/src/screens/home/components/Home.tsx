@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Alert } from "react-native";
+import { Text, View, Alert, Platform } from "react-native";
 import Carousel from "../../../components/Carousel";
 import LocationIcon from "react-native-vector-icons/Entypo";
 import * as Location from "expo-location";
@@ -109,6 +109,28 @@ const HomePage: React.FunctionComponent<{}> = () => {
       {/* Collection list */}
       <View style={homePageStyle.collectionListView}>
         {isLoading === true ? <Loader /> : <Collection data={collectionList} />}
+      </View>
+      <View
+        style={{
+          flexDirection: "column",
+          alignItems: "center",
+          marginTop: Platform.OS === "ios" ? 30 : 25,
+        }}>
+        <Text
+          style={{
+            fontFamily: "RobotoCondensed-Bold",
+            fontSize: Platform.OS === "ios" ? 25 : 20,
+          }}>
+          CLICK ON THE TAB BELOW
+        </Text>
+        <Text
+          style={{
+            fontFamily: "RobotoCondensed-Regular",
+            fontSize: Platform.OS === "ios" ? 25 : 20,
+            color: "gray",
+          }}>
+          TO NAVIGATE THROUGH SCREENS
+        </Text>
       </View>
     </View>
   );

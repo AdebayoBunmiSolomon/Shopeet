@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
-  Platform,
   Text,
   TouchableOpacity,
   View,
   ScrollView,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { productReviewStyle } from "./Style";
 import OctIcons from "react-native-vector-icons/Octicons";
@@ -46,6 +46,9 @@ const ProductReview: React.FunctionComponent<{}> = (props: any) => {
   return (
     <>
       <View style={productReviewStyle.container}>
+        <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+          <View style={{ height: "55%", width: "100%" }}></View>
+        </TouchableWithoutFeedback>
         <View style={productReviewStyle.sheetModal}>
           <View style={productReviewStyle.sheetModalTopContentView}>
             <TouchableOpacity

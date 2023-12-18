@@ -11,7 +11,7 @@ import { productList } from "../../resources/utils/Product";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
 import { Image } from "expo-image";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import GoBack from "../../components/GoBack";
 import Loader from "../../components/Loader";
 import { productImageList } from "../../resources/utils/ProductImage";
@@ -25,6 +25,7 @@ import Toast from "react-native-toast-message";
 const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
   const { productId } = props.route.params;
   const navigation: any = useNavigation();
+  const isFocused = useIsFocused();
   const [productInfo, setProductInfo] = useState<any>();
   const [prodImgList, setProdImgList] = useState<any>();
   const [likeActive, setLikeActive] = useState<boolean>(false);
@@ -68,12 +69,10 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
       );
       try {
         if (countOfSpecificProductInCart !== null) {
-          console.log(countOfSpecificProductInCart[0].countOfProd);
           setCountOfSpecificProdInCart(
             countOfSpecificProductInCart[0].countOfProd
           );
         } else {
-          console.log("this product does not exist in cart");
           setCountOfSpecificProdInCart(1);
         }
       } catch (err) {
@@ -144,8 +143,12 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
   };
 
   useEffect(() => {
-    loadProductInfo();
-  }, [productId]);
+    const load = () => {
+      loadProductInfo();
+    };
+    load();
+  }, [isFocused]);
+
   return (
     <>
       <View style={{ zIndex: 1 }}>

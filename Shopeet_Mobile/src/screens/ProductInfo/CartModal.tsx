@@ -6,7 +6,6 @@ import {
   ScrollView,
   Platform,
   TouchableWithoutFeedback,
-  Dimensions,
 } from "react-native";
 import { cartModalStyles } from "./Style";
 import OctIcons from "react-native-vector-icons/Octicons";
@@ -52,12 +51,17 @@ const CartModal: React.FunctionComponent<{}> = () => {
         setCustomerProductInCart(null);
         setCartLoading(true);
       }
+    } else {
+      setCartLoading(false);
     }
   };
 
   return (
     <>
       <View style={cartModalStyles.container}>
+        <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+          <View style={{ height: "55%", width: "100%" }}></View>
+        </TouchableWithoutFeedback>
         <View style={cartModalStyles.sheetModal}>
           <View style={cartModalStyles.sheetModalTopContentView}>
             <TouchableOpacity
@@ -140,13 +144,34 @@ const CartModal: React.FunctionComponent<{}> = () => {
                   ) : (
                     <View style={cartModalStyles.noCartContainer}>
                       <Text style={cartModalStyles.noCartText}>
-                        You currently do not have any cart(s)
+                        You currently do not have any item in cart(s)
                       </Text>
                     </View>
                   )}
                 </>
               )}
             </ScrollView>
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#34bd34a2",
+                width: "95%",
+                paddingVertical: Platform.OS === "ios" ? 20 : 15,
+                flexDirection: "row",
+                justifyContent: "center",
+                borderRadius: 10,
+                alignSelf: "center",
+                marginBottom: 10,
+              }}
+              onPress={() => navigation.navigate("Home")}>
+              <Text
+                style={{
+                  fontFamily: "RobotoCondensed-Bold",
+                  color: "white",
+                  fontSize: Platform.OS === "ios" ? 19 : 16,
+                }}>
+                Proceed to payment
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

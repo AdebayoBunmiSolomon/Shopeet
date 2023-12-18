@@ -183,7 +183,7 @@ export const productInfoStyle = StyleSheet.create({
 
 export const productReviewStyle = StyleSheet.create({
   container: {
-    backgroundColor: "#22151850",
+    backgroundColor: "#22151840",
     width: "100%",
     height: "100%",
     top: 0,
@@ -279,7 +279,7 @@ export const postReviewStyle = StyleSheet.create({
 
 export const cartModalStyles = StyleSheet.create({
   container: {
-    backgroundColor: "#22151850",
+    backgroundColor: "#22151840",
     width: "100%",
     height: "100%",
     top: 0,
@@ -314,6 +314,7 @@ export const cartModalStyles = StyleSheet.create({
     gap: 20,
     overflow: "scroll",
     flexGrow: 1,
+    paddingBottom: Platform.OS === "ios" ? 20 : 15,
   },
   loadingView: {
     width: "97%",
@@ -382,5 +383,20 @@ export const cartModalStyles = StyleSheet.create({
     fontFamily: "RobotoCondensed-Bold",
     fontSize: Platform.OS === "ios" ? 20 : 18,
     color: "#E77602",
+  },
+  paymentBtn: {
+    backgroundColor: "#34bd34a2",
+    width: "95%",
+    paddingVertical: Platform.OS === "ios" ? 20 : 15,
+    flexDirection: "row",
+    justifyContent: "center",
+    borderRadius: 10,
+    alignSelf: "center",
+    marginBottom: 10,
+  },
+  paymentBtnText: {
+    fontFamily: "RobotoCondensed-Bold",
+    color: "white",
+    fontSize: Platform.OS === "ios" ? 19 : 16,
   },
 });

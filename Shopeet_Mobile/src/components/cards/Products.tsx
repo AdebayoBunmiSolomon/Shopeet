@@ -34,7 +34,11 @@ const Products: React.FunctionComponent<cardProps> = ({ data }) => {
         showsVerticalScrollIndicator={false}
         keyExtractor={(item: any) => "#" + item.id}
         renderItem={({ item }: any) => (
-          <View style={productListStyle.productListView}>
+          <TouchableOpacity
+            style={productListStyle.productListView}
+            onPress={() => {
+              buyProduct(Number(item.id));
+            }}>
             <Image
               source={{ uri: item.image }}
               style={productListStyle.productListImage}
@@ -67,7 +71,7 @@ const Products: React.FunctionComponent<cardProps> = ({ data }) => {
                 <FontAwesome name='shopping-cart' color={"white"} size={18} />
               </TouchableOpacity>
             </View>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </View>

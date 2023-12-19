@@ -57,7 +57,7 @@ export const productList = [
       rating: 3,
       price: 270000,
       categoryId: 1,
-      image: "https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/40/1165851/1.jpg?2374"
+      image: "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/55/0079531/1.jpg?8016"
     },
     {
       id: 7,

@@ -36,30 +36,108 @@ export const productImageList = [
         productId: 2,
         image: 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/60/9149552/1.jpg?7123',
     },
-    //for chair
+    //for fridge
     {
         id: 8,
+        productId: 3,
+        image: 'https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/53/4842821/1.jpg?6137'
+    },
+    {
+        id: 9,
+        productId: 3,
+        image: 'https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/53/4842821/2.jpg?6137'
+    },
+    {
+        id: 10,
+        productId: 3,
+        image: 'https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/53/4842821/3.jpg?6137'
+    },
+    {
+        id: 11,
+        productId: 3,
+        image: 'https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/53/4842821/4.jpg?6137'
+    },
+    //for chair
+    {
+        id: 11,
         productId: 7,
         image: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/18/5088601/1.jpg?3368'
     },
     {
-        id: 9,
+        id: 12,
         productId: 7,
         image: 'https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/18/5088601/2.jpg?3368'
     },
     {
-        id: 10,
+        id: 13,
         productId: 7,
         image: 'https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/18/5088601/3.jpg?3368'
     },
     {
-        id:10,
+        id:14,
         productId: 7,
         image: 'https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/18/5088601/5.jpg?3368'
     },
     {
-        id:11,
+        id:15,
         productId: 7,
         image: 'https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/18/5088601/8.jpg?3368'
-    }
+    },
+    //phone
+    {
+        Id: 16,
+        productId: 4,
+        image: "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/31/4142352/1.jpg?0794"
+    },
+    {
+        Id: 17,
+        productId: 4,
+        image: "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/14/0131362/1.jpg?5052"
+    },
+    {
+        Id: 18,
+        productId: 4,
+        image: "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/08/1799262/1.jpg?4960"
+    },
+    //laptop
+    {
+        Id: 19,
+        productId: 5,
+        image: "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/47/124177/1.jpg?9117"
+    },
+    {
+        Id: 20,
+        productId: 5,
+        image: "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/47/124177/2.jpg?9117"
+    },
+    {
+        Id: 21,
+        productId: 5,
+        image: "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/47/124177/3.jpg?9113"
+    },
+    {
+        Id: 22,
+        productId: 6,
+        image: "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/55/0079531/1.jpg?8016"
+    },
+    {
+        Id: 23,
+        productId: 6,
+        image: "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/55/0079531/2.jpg?8016"
+    },
+    {
+        Id: 24,
+        productId: 6,
+        image: "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/55/0079531/3.jpg?8016"
+    },
+    {
+        Id: 25,
+        productId: 6,
+        image: "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/55/0079531/4.jpg?8016"
+    },
+    {
+        Id: 26,
+        productId: 6,
+        image: "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/55/0079531/5.jpg?8016"
+    },
 ]

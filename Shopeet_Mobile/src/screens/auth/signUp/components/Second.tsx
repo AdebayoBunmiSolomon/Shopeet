@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { View, Text, TextInput } from "react-native";
 import { secondScreenStyle } from "./Style";
 import Animated, { BounceInRight } from "react-native-reanimated";
-import { UseAuthContext } from "../../../../context/Auth/useAuth";
+import { UseAuthContext } from "../../../../context/Auth/hooks/useAuth";
 
 const Second: React.FunctionComponent<{}> = () => {
   const { signUpForm, setSignUpForm } = useContext(UseAuthContext);

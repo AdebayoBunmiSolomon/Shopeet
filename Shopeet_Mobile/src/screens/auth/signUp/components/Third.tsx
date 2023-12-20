@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { View, Text, TextInput } from "react-native";
 import { thirdScreenStyle } from "./Style";
 import Animated, { ZoomIn } from "react-native-reanimated";
-import { UseAuthContext } from "../../../../context/Auth/useAuth";
+import { UseAuthContext } from "../../../../context/Auth/hooks/useAuth";
 
 const Third: React.FunctionComponent<{}> = () => {
   const { signUpForm, setSignUpForm } = useContext(UseAuthContext);

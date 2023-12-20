@@ -11,6 +11,7 @@ import Loader from "../../../components/Loader";
 import Products from "../../../components/cards/Products";
 import { useNavigation } from "@react-navigation/native";
 import { ShopContext } from "../../../context/Auth/shopContext";
+import { GetRequest, url } from "../../../context/Auth/hooks/useRequest";
 
 const Search: React.FunctionComponent<{}> = () => {
   const [productData, setProductData] = useState<any>(null);
@@ -23,16 +24,16 @@ const Search: React.FunctionComponent<{}> = () => {
     navigation.navigate("Collection");
   };
 
-  const loadProductData = () => {
+  const loadProductData = async () => {
     setIsProductLoading(true);
     //make get request
-    const products = productList;
+    const { status, data } = await GetRequest(`${url}products`, undefined);
     try {
       //load data after get request is made.
       setIsProductLoading(true);
-      if (products !== null) {
-        setDataCount(products.length);
-        setProductData(products);
+      if (status === 200) {
+        setProductData(data);
+        setDataCount(data.length);
         setIsProductLoading(false);
       } else {
         //set data back to null if data not loaded correctly...

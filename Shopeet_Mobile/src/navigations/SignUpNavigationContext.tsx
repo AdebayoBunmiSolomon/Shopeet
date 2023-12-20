@@ -1,5 +1,5 @@
 import React from "react";
-import { UseAuthContextProvider } from "../context/Auth/useAuth";
+import { UseAuthContextProvider } from "../context/Auth/hooks/useAuth";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignUp from "../screens/auth/signUp/SignUp";
 

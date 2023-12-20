@@ -1,5 +1,4 @@
 export const productImageList = [
-    //for jeans
     {
         id: 1,
         productId: 1,
@@ -15,7 +14,6 @@ export const productImageList = [
         productId: 1,
         image: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/80/0337112/1.jpg?0462'
     },
-    //for top
     {
         id: 4,
         productId: 2,
@@ -36,7 +34,6 @@ export const productImageList = [
         productId: 2,
         image: 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/60/9149552/1.jpg?7123',
     },
-    //for fridge
     {
         id: 8,
         productId: 3,
@@ -57,7 +54,6 @@ export const productImageList = [
         productId: 3,
         image: 'https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/53/4842821/4.jpg?6137'
     },
-    //for chair
     {
         id: 11,
         productId: 7,
@@ -83,7 +79,6 @@ export const productImageList = [
         productId: 7,
         image: 'https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/18/5088601/8.jpg?3368'
     },
-    //phone
     {
         Id: 16,
         productId: 4,
@@ -99,7 +94,6 @@ export const productImageList = [
         productId: 4,
         image: "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/08/1799262/1.jpg?4960"
     },
-    //laptop
     {
         Id: 19,
         productId: 5,

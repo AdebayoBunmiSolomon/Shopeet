@@ -8,7 +8,7 @@ import { useNavigation, StackActions } from "@react-navigation/native";
 import First from "./components/First";
 import Second from "./components/Second";
 import Third from "./components/Third";
-import { UseAuthContext } from "../../../context/Auth/useAuth";
+import { UseAuthContext } from "../../../context/Auth/hooks/useAuth";
 import Toast from "react-native-toast-message";
 
 const SignUp: React.FunctionComponent<{}> = () => {

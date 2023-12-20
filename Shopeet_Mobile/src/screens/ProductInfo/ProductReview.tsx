@@ -9,23 +9,24 @@ import {
 import { productReviewStyle } from "./Style";
 import OctIcons from "react-native-vector-icons/Octicons";
 import { useNavigation } from "@react-navigation/native";
-import { productReviewList } from "../../resources/utils/ProductReview";
+import { GetRequest, url } from "../../context/Auth/hooks/useRequest";
 
 const ProductReview: React.FunctionComponent<{}> = (props: any) => {
   const { productId } = props.route.params;
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [prodReview, setProdReview] = useState<any>();
 
-  const loadProductReview = () => {
+  const loadProductReview = async () => {
     setIsLoading(true);
     //make get request
-    const productReview = productReviewList.filter(
-      (reviews: any) => reviews.productId === productId
+    const { status, data } = await GetRequest(
+      `${url}productReviews?productId=${productId}`,
+      undefined
     );
     try {
       setIsLoading(true);
-      if (productReview !== null) {
-        setProdReview(productReview);
+      if (status === 200) {
+        setProdReview(data);
         setIsLoading(false);
       } else {
         setProdReview(null);

@@ -17,7 +17,6 @@ const Products: React.FunctionComponent<cardProps> = ({ data }) => {
 
   const buyProduct = (productId: number) => {
     navigation.navigate("ProductInfo", { productId });
-    console.log(productId);
   };
 
   return (

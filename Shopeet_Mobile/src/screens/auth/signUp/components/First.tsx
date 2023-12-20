@@ -3,7 +3,7 @@ import { View, Text, TextInput, Dimensions } from "react-native";
 import { firstScreenStyle } from "./Style";
 import PhoneInput from "react-native-phone-number-input";
 import Animated, { BounceInLeft } from "react-native-reanimated";
-import { UseAuthContext } from "../../../../context/Auth/useAuth";
+import { UseAuthContext } from "../../../../context/Auth/hooks/useAuth";
 
 const First: React.FunctionComponent<{}> = () => {
   const { signUpForm, setSignUpForm } = useContext(UseAuthContext);

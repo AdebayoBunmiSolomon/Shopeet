@@ -185,7 +185,10 @@ const Cart: React.FunctionComponent<{}> = () => {
             Total Price of Product:{" "}
           </Text>
           <Text style={cartStyle.prodCalcRightText}>
-            $ {formatProductPrice(Number(totalPriceOfProduct))}
+            ${" "}
+            {formatProductPrice(
+              Number(!totalPriceOfProduct ? 0 : totalPriceOfProduct)
+            )}
           </Text>
         </View>
         <View style={cartStyle.prodCalcInfoView}>
@@ -207,7 +210,10 @@ const Cart: React.FunctionComponent<{}> = () => {
         <TouchableOpacity style={cartStyle.paymentBtn}>
           <Text style={cartStyle.paymentBtnText}>Process payment</Text>
           <Text style={cartStyle.paymentBtnText}>
-            $ {formatProductPrice(Number(totalPriceOfProduct))}
+            ${" "}
+            {formatProductPrice(
+              Number(!totalPriceOfProduct ? 0 : totalPriceOfProduct)
+            )}
           </Text>
         </TouchableOpacity>
       </View>

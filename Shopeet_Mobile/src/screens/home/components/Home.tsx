@@ -8,6 +8,8 @@ import { collectionList } from "../../../resources/utils/Collection";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Loader from "../../../components/Loader";
 import Collection from "../../../components/cards/Collection";
+import axios from "axios";
+import { GetRequest, url } from "../../../context/Auth/hooks/useRequest";
 
 const HomePage: React.FunctionComponent<{}> = () => {
   const [locationServiceEnabled, setLocationServiceEnabled] = useState<any>();
@@ -17,15 +19,15 @@ const HomePage: React.FunctionComponent<{}> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [collectionData, setCollectionData] = useState<any>(null);
 
-  const loadCollectionList = () => {
+  const loadCollectionList = async () => {
     setIsLoading(true);
     //make get request to api
-    const collection = collectionList;
+    const { status, data } = await GetRequest(`${url}category`, undefined);
     try {
       //load data after get request is made.
       setIsLoading(true);
-      if (collection !== null) {
-        setCollectionData(collection);
+      if (status === 200) {
+        setCollectionData(data);
         setIsLoading(false);
       } else {
         //set data back to null if data not loaded correctly...
@@ -108,7 +110,7 @@ const HomePage: React.FunctionComponent<{}> = () => {
       </View>
       {/* Collection list */}
       <View style={homePageStyle.collectionListView}>
-        {isLoading === true ? <Loader /> : <Collection data={collectionList} />}
+        {isLoading === true ? <Loader /> : <Collection data={collectionData} />}
       </View>
       <View
         style={{

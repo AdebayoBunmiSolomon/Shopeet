@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -21,6 +21,7 @@ import PostReview from "./PostReview";
 import CartIcon from "../../components/CartIcon";
 import { ShopContext } from "../../context/Auth/shopContext";
 import Toast from "react-native-toast-message";
+import { GetRequest, url } from "../../context/Auth/hooks/useRequest";
 
 const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
   const { productId } = props.route.params;
@@ -83,17 +84,18 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
   };
 
   //load product information
-  const loadProductInfo = () => {
+  const loadProductInfo = async () => {
     setIsLoading(true);
     //make get request
-    const productInfo = productList.filter(
-      (product: any) => product.id === productId
+    const { status, data } = await GetRequest(
+      `${url}products?id=${productId}`,
+      undefined
     );
     try {
       //load data after get request is made.
       setIsLoading(true);
-      if (productInfo !== null) {
-        setProductInfo(productInfo);
+      if (status === 200) {
+        setProductInfo(data);
         loadProductImage(productId);
         loadCountOfSpecificProductInCart(productId, 1);
         setIsLoading(false);
@@ -105,6 +107,27 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
     } catch (err) {
       console.log(err);
       setIsLoading(true);
+    }
+  };
+
+  //get list of images of product
+  const loadProductImage = async (gottenProductId: number) => {
+    //make get request
+    const { status, data } = await GetRequest(
+      `${url}productImage?productId=${gottenProductId}`,
+      undefined
+    );
+
+    //proceed to get product image list
+    try {
+      if (status === 200) {
+        setProdImgList(data);
+      } else {
+        setProdImgList(null);
+        console.log("Error fetching data");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -121,24 +144,6 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
       setInitialIndex(initialIndex - 1);
     } else {
       setInitialIndex(initialIndex - 1);
-    }
-  };
-
-  //get list of images of product
-  const loadProductImage = (gottenProductId: number) => {
-    //make get request
-    const productImage = productImageList.filter(
-      (prodImgList: any) => prodImgList.productId === gottenProductId
-    );
-    //proceed to get product image list
-    try {
-      if (productImage !== null) {
-        setProdImgList(productImage);
-      } else {
-        setProdImgList(null);
-      }
-    } catch (err) {
-      console.log(err);
     }
   };
 
@@ -219,7 +224,9 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
                       </TouchableOpacity>
                     </View>
                     <Image
-                      source={{ uri: prodImgList[initialIndex].image }}
+                      source={{
+                        uri: prodImgList && prodImgList[initialIndex].image,
+                      }}
                       style={{ width: "100%", height: 300 }}
                       transition={1000}
                       contentFit='contain'

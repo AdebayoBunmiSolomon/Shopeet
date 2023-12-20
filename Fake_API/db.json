@@ -1,0 +1,338 @@
+{
+  "admins": [
+    {
+      "id": 1,
+      "email": "solomon.bunmi@yahoo.com",
+      "username": "adebunmy",
+      "password": "adebunmy1234"
+    }
+  ],
+  "carts": [],
+  "customers": [
+    {
+      "id": 1,
+      "email": "solomon.bunmi@yahoo.com",
+      "username": "adebunmy",
+      "password": "adebunmy1234",
+      "image": "...."
+    }
+  ],
+  "customerHistory": [],
+  "category": [
+    {
+      "id": 1,
+      "name": "Health & Beauty",
+      "color": "#300fd853",
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScI5w14pAcJEazTvgkTTvE7hdbuJN-SwIa1XN3qMWUPA&s"
+    },
+    {
+      "id": 2,
+      "name": "Home & Office",
+      "color": "#e775027b",
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVjmRb6ERWTnSgsXmZs8duTE4MVLQSMvOwDg&usqp=CAU"
+    },
+    {
+      "id": 3,
+      "name": "Appliances",
+      "color": "#f0152e7b",
+      "img": "https://cdn.firstcry.com/education/2023/01/13101355/Names-Of-Household-Appliances-In-English.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Phones & Tablets",
+      "color": "#3a3c3fc3",
+      "img": "https://mobilemall.co/blog/wp-content/uploads/2023/06/Guide-to-Mobile-Gadgets-Enhance-Smartphone-Experience.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Computing",
+      "color": "#300fd853",
+      "img": "https://iictcomputeracademy.com/wp-content/uploads/2023/04/IMG_20230426_164334.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Electronics",
+      "color": "#e775027b",
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7esGeFA7xI4EEmLrgNJgy8C1H_tbaSIiNqA&usqp=CAU"
+    },
+    {
+      "id": 7,
+      "name": "Fashion & Clothing",
+      "color": "#f0152e7b",
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH_nhqXazGU_X4MBD4X7PfaoT_F-02v0BwDfCNW6zVLGNpspcGNcxw31WrCxGz29_s7DM&usqp=CAU"
+    },
+    {
+      "id": 8,
+      "name": "Baby Products",
+      "color": "#3a3c3fc3",
+      "img": "https://cdn.cdnparenting.com/articles/2017/10/418461847-H-1024x700.webp"
+    },
+    {
+      "id": 9,
+      "name": "Gaming",
+      "color": "#f0152e7b",
+      "img": "https://builtin.com/sites/www.builtin.com/files/styles/og/public/2022-09/gaming.png"
+    },
+    {
+      "id": 10,
+      "name": "Sporting Goods",
+      "color": "#e775027b",
+      "img": ""
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Men's Jeans",
+      "about": "Jeans is used for covering the legs",
+      "description": "A style of jeans created for men and the general traits of their anatomy.This generally means that they are looser fitting and have more depth within the crotch.",
+      "rating": 5,
+      "price": 500,
+      "categoryId": 1,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/80/0337112/1.jpg?0462"
+    },
+    {
+      "id": 2,
+      "name": "Men's Top",
+      "about": "Top is used for covering the upper body",
+      "description": "a garment for the upper part of the body: such as. a. : a cloth garment usually having a collar, sleeves, a front opening, and a tail long enough to be tucked inside trousers or a skirt.",
+      "rating": 4,
+      "price": 1000,
+      "categoryId": 1,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/12/2939552/1.jpg?1287"
+    },
+    {
+      "id": 3,
+      "name": "Hisense 280Ltrs Fridge",
+      "about": "This fridge is good and can be used to cool things as well as preserve foods",
+      "description": "For that extra bit of storage you can’t go past this 120L Bar Fridge from Hisense. Its reversible shelves allow it to suit most homes conveniently and its easy clean features and low noise design make this Bar Fridge an ideal solution.Specifications This bar fridge measures 820mm (height) x 515mm (width) x 543 (depth) and has a gross storage capacity of 120L. It has a two star energy rating and has three storage shelves plus a vegetable crisper which is made from tempered glass.Easy to Clean. The shelves are made from tempered glass meaning they’re easier to clean due to their flat surface. The toughened glass is safe to use in the home and reduces the chances of spillage. The door gasket seals are also simple to clean due to the simple method of removing them.",
+      "rating": 3,
+      "price": 270000,
+      "categoryId": 1,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/53/4842821/1.jpg?6137"
+    },
+    {
+      "id": 4,
+      "name": "Redmi Note 12 Pro",
+      "about": "XIAOMI Redmi 12 6.79 8GB RAM/256 GB ROM Android 13-Midnight Black",
+      "description": "Support 3 refresh rates (60Hz/90Hz/120Hz) for a smoother visual experience and low energy consumption. Enjoy an unbeatably smooth experience with up to 120Hz high refresh rate, whether performing deep in a gaming session or browsing social media.",
+      "rating": 2,
+      "price": 1000,
+      "categoryId": 1,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/31/4142352/1.jpg?0794"
+    },
+    {
+      "id": 5,
+      "name": "Lenovo AMD RYZEN 3",
+      "about": "SHARE THIS PRODUCT 1TB 8GB RAM 1TB HDD 2.6 To 3.4ghz Win 10+32GB Flash",
+      "description": "The Lenovo V14 AMD HD PC is a 14.1-inch laptop with a screen resolution of 220nits. Features 4GB of memory and a 1TB Hard Disk drive. With an AMD A4-3020E processor – 1.2GHz base speed can turbo boost to 2.6. It lacks an optical drive for burning CDs or DVDs for its slim and portable build.",
+      "rating": 4,
+      "price": 260000,
+      "categoryId": 1,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/47/124177/1.jpg?9117"
+    },
+    {
+      "id": 6,
+      "name": "Shower Gel",
+      "about": "Queen Helene Lightening Shower Gel With Egg Yolk >1000ml...",
+      "description": "Shower gel (also shower cream or body wash) is a specialized liquid product used for cleaning the body during showers. Not to be confused with liquid soaps, shower gels, in fact, do not contain saponified oil. Instead, it uses synthetic detergents derived from either petroleum or plant sources.",
+      "rating": 3,
+      "price": 270000,
+      "categoryId": 1,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/55/0079531/1.jpg?8016"
+    },
+    {
+      "id": 7,
+      "name": "FURGLE Chair For Gaming & Programming",
+      "about": "Custom Home & Studio Ergonomic Gaming Chair used as relaxation and as well for programming which enhances the easiness of work.",
+      "description": "Features: one-piece high-density foam: high pressure resistance, strong elasticity and enhanced comfort High quality PU leather: wear resistant, breathable, easy to clean Increase the detachable headrest lumbar pillow: relieve fatigue and protect the neck and spine Tilt Locking mechanism 90-180 degrees angle adjuster",
+      "rating": 2,
+      "price": 185000,
+      "categoryId": 1,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/18/5088601/1.jpg?3368"
+    }
+  ],
+  "productImage": [
+    {
+      "id": 1,
+      "productId": 1,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/80/0337112/1.jpg?0462"
+    },
+    {
+      "id": 2,
+      "productId": 1,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/68/153479/3.jpg?3589"
+    },
+    {
+      "id": 3,
+      "productId": 1,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/80/0337112/1.jpg?0462"
+    },
+    {
+      "id": 4,
+      "productId": 2,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/12/2939552/1.jpg?1287"
+    },
+    {
+      "id": 5,
+      "productId": 2,
+      "image": "https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/34/8580262/1.jpg?6056"
+    },
+    {
+      "id": 6,
+      "productId": 2,
+      "image": "https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/50/6516352/1.jpg?5433"
+    },
+    {
+      "id": 7,
+      "productId": 2,
+      "image": "https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/60/9149552/1.jpg?7123"
+    },
+    {
+      "id": 8,
+      "productId": 3,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/53/4842821/1.jpg?6137"
+    },
+    {
+      "id": 9,
+      "productId": 3,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/53/4842821/2.jpg?6137"
+    },
+    {
+      "id": 10,
+      "productId": 3,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/53/4842821/3.jpg?6137"
+    },
+    {
+      "id": 11,
+      "productId": 3,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/53/4842821/4.jpg?6137"
+    },
+    {
+      "id": 11,
+      "productId": 7,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/18/5088601/1.jpg?3368"
+    },
+    {
+      "id": 12,
+      "productId": 7,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/18/5088601/2.jpg?3368"
+    },
+    {
+      "id": 13,
+      "productId": 7,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/18/5088601/3.jpg?3368"
+    },
+    {
+      "id": 14,
+      "productId": 7,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/18/5088601/5.jpg?3368"
+    },
+    {
+      "id": 15,
+      "productId": 7,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/18/5088601/8.jpg?3368"
+    },
+    {
+      "id": 16,
+      "productId": 4,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/31/4142352/1.jpg?0794"
+    },
+    {
+      "id": 17,
+      "productId": 4,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/14/0131362/1.jpg?5052"
+    },
+    {
+      "id": 18,
+      "productId": 4,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/08/1799262/1.jpg?4960"
+    },
+    {
+      "id": 19,
+      "productId": 5,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/47/124177/1.jpg?9117"
+    },
+    {
+      "id": 20,
+      "productId": 5,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/47/124177/2.jpg?9117"
+    },
+    {
+      "id": 21,
+      "productId": 5,
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/47/124177/3.jpg?9113"
+    },
+    {
+      "id": 22,
+      "productId": 6,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/55/0079531/1.jpg?8016"
+    },
+    {
+      "id": 23,
+      "productId": 6,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/55/0079531/2.jpg?8016"
+    },
+    {
+      "id": 24,
+      "productId": 6,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/55/0079531/3.jpg?8016"
+    },
+    {
+      "id": 25,
+      "productId": 6,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/55/0079531/4.jpg?8016"
+    },
+    {
+      "id": 26,
+      "productId": 6,
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/55/0079531/5.jpg?8016"
+    }
+  ],
+  "FAQs": [
+    {
+      "id": 1,
+      "question": "What is jeans used for",
+      "productId": 1,
+      "answer": "jeans is used for covering the legs"
+    }
+  ],
+  "productReviews": [
+    {
+      "id": 1,
+      "productId": 1,
+      "customerName": "Adebayo Bunmi Solomon",
+      "review": "This Jean is a very good product and easy to wear. It lasts long and never washes away when washing it."
+    },
+    {
+      "id": 2,
+      "productId": 1,
+      "customerName": "Ayinla Abel Babtunde",
+      "review": "I hate this jean because it is very tight. I really want to even throw it away."
+    },
+    {
+      "id": 3,
+      "productId": 1,
+      "customerName": "Anthony Chukwurah",
+      "review": "The only thing I can say for now is that God bless the people who made this jeans. It ha been a better one for me. So dope, better, and fashionable."
+    },
+    {
+      "id": 4,
+      "productId": 1,
+      "customerName": "Ojakovo Eric",
+      "review": "Very Good one. Thumbs up to the people that made it."
+    },
+    {
+      "id": 5,
+      "productId": 1,
+      "customerName": "Emmanuel Egbian",
+      "review": "E no go better for people wey make this jeans. E con be like sey I waste money thro-way. For this reason, una mind nor go touch ground."
+    },
+    {
+      "id": 6,
+      "productId": 2,
+      "customerName": "Iranloye Opemipo",
+      "review": "I do not have any reviews at all. All i want is a refund. else, una mind nor go touch ground!!!"
+    }
+  ]
+}

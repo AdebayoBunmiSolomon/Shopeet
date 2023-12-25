@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, ScrollView, TouchableOpacity, Text } from "react-native";
 import { signUpScreenStyle } from "../style";
-import { signUpScreenColors } from "../../../resources/Colors";
 import Header from "../../../components/Header";
 import GoBack from "../../../components/GoBack";
 import { useNavigation, StackActions } from "@react-navigation/native";
@@ -10,41 +9,45 @@ import Second from "./components/Second";
 import Third from "./components/Third";
 import { UseAuthContext } from "../../../context/Auth/hooks/useAuth";
 import Toast from "react-native-toast-message";
+import {
+  GetRequest,
+  axiosConfig,
+  url,
+} from "../../../context/Auth/hooks/useRequest";
 
 const SignUp: React.FunctionComponent<{}> = () => {
   const navigation: any = useNavigation();
-  const [state, setState] = useState<number>(1);
-  const [bgColor, setBgColor] = useState<string>(
-    signUpScreenColors.form.primary
-  );
-  const [nxtBtnTxt, setNxtBtnTxt] = useState<string>("Next");
-  const { signUp, msgDetails, isShow, signUpForm } = useContext(UseAuthContext);
+  const { signUp, signUpStage, bgColor, nxtBtnTxt, setCustId } =
+    useContext(UseAuthContext);
+  const [isLengthLoading, setIsLengthLoading] = useState<boolean>(true);
 
   const nextSubmit = () => {
-    if (state === 1) {
-      if (!signUpForm.fullname.trim() || !signUpForm.phone.trim()) {
-        signUp();
+    signUp();
+  };
+
+  const getLengthOfCustomerFromServer = async () => {
+    setIsLengthLoading(true);
+    try {
+      setIsLengthLoading(true);
+      const { status, data } = await GetRequest(`${url}customers`, axiosConfig);
+      if (status === 200 && data && data.length > 0) {
+        setCustId(data.length + 1);
+        setIsLengthLoading(false);
+        return false;
       } else {
-        setState(state + 1);
-        setBgColor(signUpScreenColors.form.tertiary);
+        setCustId(0);
+        setIsLengthLoading(true);
       }
-      return null;
-    } else if (state === 2) {
-      if (!signUpForm.username.trim() || !signUpForm.email.trim()) {
-        signUp();
-      } else {
-        setState(state + 1);
-        setBgColor(signUpScreenColors.form.secondary);
-        setNxtBtnTxt("Submit");
-      }
-    } else if (nxtBtnTxt === "Submit" && state === 3) {
-      if (!signUpForm.password.trim()) {
-        signUp();
-      } else {
-        navigation.dispatch(StackActions.replace("Home", {}));
-      }
+    } catch (err) {
+      console.log("Error fetching customer length", err);
+      setCustId(0);
+      setIsLengthLoading(true);
     }
   };
+
+  useEffect(() => {
+    getLengthOfCustomerFromServer();
+  }, []);
 
   return (
     <View
@@ -57,7 +60,7 @@ const SignUp: React.FunctionComponent<{}> = () => {
       <View style={signUpScreenStyle.header}>
         <GoBack
           onClick={() => {
-            navigation.dispatch(StackActions.replace("Login", {}));
+            navigation.dispatch(StackActions.replace("Welcome", {}));
           }}
           buttonStyle={signUpScreenStyle.goBackBtn}
           iconColor={signUpScreenStyle.goBackBtnIcon.color}
@@ -74,12 +77,12 @@ const SignUp: React.FunctionComponent<{}> = () => {
       {/* form view */}
       <ScrollView contentContainerStyle={signUpScreenStyle.scrollViewContainer}>
         {(() => {
-          switch (state) {
-            case 1:
+          switch (signUpStage) {
+            case "first":
               return <First />;
-            case 2:
+            case "second":
               return <Second />;
-            case 3:
+            case "third":
               return <Third />;
             default:
               return null;
@@ -93,19 +96,19 @@ const SignUp: React.FunctionComponent<{}> = () => {
         <View
           style={[
             signUpScreenStyle.dot,
-            { opacity: state === 1 ? 0.6 : undefined },
+            { opacity: signUpStage === "first" ? 0.6 : undefined },
           ]}></View>
         {/* second dot */}
         <View
           style={[
             signUpScreenStyle.dot,
-            { opacity: state === 2 ? 0.6 : undefined },
+            { opacity: signUpStage === "second" ? 0.6 : undefined },
           ]}></View>
         {/* third dot */}
         <View
           style={[
             signUpScreenStyle.dot,
-            { opacity: state === 3 ? 0.6 : undefined },
+            { opacity: signUpStage === "third" ? 0.6 : undefined },
           ]}></View>
       </View>
       {/* bottom button */}
@@ -114,7 +117,7 @@ const SignUp: React.FunctionComponent<{}> = () => {
         <TouchableOpacity
           style={signUpScreenStyle.skipBtn}
           onPress={() => {
-            navigation.dispatch(StackActions.replace("Login", {}));
+            navigation.dispatch(StackActions.replace("Welcome", {}));
           }}>
           <Text style={signUpScreenStyle.bottomBtnText}>Skip</Text>
         </TouchableOpacity>
@@ -124,7 +127,9 @@ const SignUp: React.FunctionComponent<{}> = () => {
           onPress={() => {
             nextSubmit();
           }}>
-          <Text style={signUpScreenStyle.bottomBtnText}>{nxtBtnTxt}</Text>
+          <Text style={signUpScreenStyle.bottomBtnText}>
+            {!isLengthLoading ? nxtBtnTxt : "Loading..."}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

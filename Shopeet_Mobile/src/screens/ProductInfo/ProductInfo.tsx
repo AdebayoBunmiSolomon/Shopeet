@@ -21,7 +21,11 @@ import PostReview from "./PostReview";
 import CartIcon from "../../components/CartIcon";
 import { ShopContext } from "../../context/Auth/shopContext";
 import Toast from "react-native-toast-message";
-import { GetRequest, url } from "../../context/Auth/hooks/useRequest";
+import {
+  GetRequest,
+  axiosConfig,
+  url,
+} from "../../context/Auth/hooks/useRequest";
 
 const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
   const { productId } = props.route.params;
@@ -89,7 +93,7 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
     //make get request
     const { status, data } = await GetRequest(
       `${url}products?id=${productId}`,
-      undefined
+      axiosConfig
     );
     try {
       //load data after get request is made.

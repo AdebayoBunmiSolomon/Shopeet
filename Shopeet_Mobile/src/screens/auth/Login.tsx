@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -18,6 +18,7 @@ import { loginScreenColors } from "../../resources/Colors";
 import { StackActions, useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 import { Image } from "expo-image";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login: React.FunctionComponent<{}> = () => {
   const navigation: any = useNavigation();
@@ -25,6 +26,7 @@ const Login: React.FunctionComponent<{}> = () => {
     useState<string>("gray");
   const [passWordBorderColor, setPassWordBorderColor] =
     useState<string>("gray");
+  const [tokenValue, setTokenValue] = useState<string | null>("");
 
   //form data state for username & password
   const [formData, setFormData] = useState({
@@ -79,6 +81,21 @@ const Login: React.FunctionComponent<{}> = () => {
       navigation.dispatch(StackActions.replace("Home", {}));
     }
   };
+
+  const onPageLoad = async () => {
+    const token: string | null = await AsyncStorage.getItem("@userData");
+    const parsedToken = JSON.parse(token!);
+    if (parsedToken.submitted === false) {
+      setTokenValue("");
+    } else {
+      //take me to home screen if there is token
+      setTokenValue(parsedToken);
+    }
+  };
+
+  useEffect(() => {
+    onPageLoad();
+  }, []);
 
   return (
     <>
@@ -186,17 +203,21 @@ const Login: React.FunctionComponent<{}> = () => {
                   <Text style={loginScreenStyle.buttonText}>Continue</Text>
                 </TouchableOpacity>
               </View>
-              <View style={loginScreenStyle.bottomTextView}>
-                <Text style={loginScreenStyle.bottomText}>
-                  Don't have an account,{" "}
-                </Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    SignUp();
-                  }}>
-                  <Text style={loginScreenStyle.bottomButtonText}>SignUp</Text>
-                </TouchableOpacity>
-              </View>
+              {!tokenValue ? (
+                <View style={loginScreenStyle.bottomTextView}>
+                  <Text style={loginScreenStyle.bottomText}>
+                    Don't have an account,{" "}
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      SignUp();
+                    }}>
+                    <Text style={loginScreenStyle.bottomButtonText}>
+                      SignUp
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              ) : null}
             </View>
           </KeyboardAvoidingView>
         </ScrollView>

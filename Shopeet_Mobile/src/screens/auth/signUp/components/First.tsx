@@ -16,8 +16,12 @@ const First: React.FunctionComponent<{}> = () => {
           <TextInput
             style={firstScreenStyle.textInput}
             onChangeText={(fullname) => {
-              setSignUpForm({ ...signUpForm, fullname: fullname });
+              setSignUpForm({
+                ...signUpForm,
+                fullname: fullname,
+              });
             }}
+            // value={signUpForm.fullname}
           />
         </View>
         <View>
@@ -32,6 +36,7 @@ const First: React.FunctionComponent<{}> = () => {
               flagButtonStyle={firstScreenStyle.phonePadButton}
               placeholder=''
               codeTextStyle={{ color: "black" }}
+              // value={signUpForm.phone}
             />
           </View>
         </View>

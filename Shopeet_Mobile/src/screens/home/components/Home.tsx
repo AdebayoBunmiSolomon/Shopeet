@@ -9,7 +9,11 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Loader from "../../../components/Loader";
 import Collection from "../../../components/cards/Collection";
 import axios from "axios";
-import { GetRequest, url } from "../../../context/Auth/hooks/useRequest";
+import {
+  GetRequest,
+  axiosConfig,
+  url,
+} from "../../../context/Auth/hooks/useRequest";
 
 const HomePage: React.FunctionComponent<{}> = () => {
   const [locationServiceEnabled, setLocationServiceEnabled] = useState<any>();
@@ -22,7 +26,7 @@ const HomePage: React.FunctionComponent<{}> = () => {
   const loadCollectionList = async () => {
     setIsLoading(true);
     //make get request to api
-    const { status, data } = await GetRequest(`${url}category`, undefined);
+    const { status, data } = await GetRequest(`${url}category`, axiosConfig);
     try {
       //load data after get request is made.
       setIsLoading(true);

@@ -14,20 +14,24 @@
   "carts": [],
   "customers": [
     {
-      "id": 1,
+      "id": "f4a1bc9e-b5cd-479f-8451-709a329f23f9",
       "fullName": "testing",
       "phone": "2349076544967",
       "username": "testing",
       "email": "testing@gmail.com",
-      "password": "testing1234"
+      "password": "testing1234",
+      "deviceName": "TECNO KD7",
+      "deviceImei": "f4a1bc9e-b5cd-479f-8451-709a329f23f9"
     },
     {
-      "id": 2,
-      "fullName": "Adebayo Bunmi Solomon",
+      "id": "24388d49-850a-4ff7-ba33-77fff9de1907",
+      "fullName": "adebayo bunmi solomon",
       "phone": "2348152282617",
-      "username": "Adebunmy",
+      "username": "adebunmy",
       "email": "adebayobunmisolomon@gmail.com",
-      "password": "08023640617"
+      "password": "Solo41526374",
+      "deviceName": "TECNO KD7",
+      "deviceImei": "24388d49-850a-4ff7-ba33-77fff9de1907"
     }
   ],
   "customerHistory": [],

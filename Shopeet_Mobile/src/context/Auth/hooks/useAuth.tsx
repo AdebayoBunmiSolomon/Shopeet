@@ -1,10 +1,15 @@
 import React, { createContext, useState } from "react";
 import Toast from "react-native-toast-message";
-import { url, GetRequest, PostRequest } from "./useRequest";
+import { url, PostRequest } from "./useRequest";
+import {
+  validateSignUpData,
+  storeUserDataInDevice,
+} from "../../../resources/utils/functions";
 import { signUpScreenColors } from "../../../resources/Colors";
 import * as EmailValidator from "email-validator";
 import { useNavigation, StackActions } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Constants from "expo-constants";
 
 export const UseAuthContext = createContext<any>(null);
 
@@ -22,66 +27,40 @@ export const UseAuthContextProvider = (props: any) => {
   );
   const [nxtBtnTxt, setNxtBtnTxt] = useState<string>("Next");
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [custId, setCustId] = useState<number>(0);
   const navigation: any = useNavigation();
-
-  //validate form data from api
-  const validateFormData = async (
-    clause: string,
-    clauseValue: string,
-    msgClause: string
-  ) => {
-    try {
-      const { status, data } = await GetRequest(
-        `${url}customers?${clause}=${clauseValue}`,
-        undefined
-      );
-
-      if (status === 200 && data && data.length > 0) {
-        Toast.show({
-          type: "error",
-          text1: "Sign-up error",
-          text2: `${msgClause} already taken`,
-        });
-        return true; // Indicates there are errors
-      }
-    } catch (error) {
-      console.error("Error validating form data:", error);
-    }
-
-    return false; // No errors
-  };
 
   //take schema of the form
   const formData = {
-    id: custId,
-    fullName: signUpForm.fullname.toString().replace(/^\s+|\s+$/gm, ""),
+    id: Constants.sessionId,
+    fullName: signUpForm.fullname
+      .toLowerCase()
+      .toString()
+      .replace(/^\s+|\s+$/gm, ""),
     phone: signUpForm.phone.toString().replace(/\+/g, ""),
-    username: signUpForm.username.toString().replace(/^\s+|\s+$/gm, ""),
-    email: signUpForm.email.toString().replace(/^\s+|\s+$/gm, ""),
+    username: signUpForm.username
+      .toLowerCase()
+      .toString()
+      .replace(/^\s+|\s+$/gm, ""),
+    email: signUpForm.email
+      .toString()
+      .toLowerCase()
+      .replace(/^\s+|\s+$/gm, ""),
     password: signUpForm.password.toString(),
-  };
-
-  // save user information in physical device
-  const storeUserDataInDevice = async () => {
-    const userData = {
-      submitted: true,
-      token: 1,
-    };
-    await AsyncStorage.setItem("@userData", JSON.stringify(userData));
+    deviceName: Constants.deviceName,
+    deviceImei: Constants.sessionId,
   };
 
   const submitUserData = async () => {
     setIsLoading(true);
     try {
       setIsLoading(true);
-      const { status, data } = await PostRequest(
+      const { status } = await PostRequest(
         `${url}customers`,
         formData,
         undefined
       );
       if (status === 201) {
-        storeUserDataInDevice();
+        storeUserDataInDevice(true, Constants.sessionId, "");
         setIsLoading(false);
         return true;
       } else {
@@ -121,17 +100,17 @@ export const UseAuthContextProvider = (props: any) => {
       const phoneWithoutPlus = signUpForm.phone.replace(/\+/g, "");
 
       // Validate fullname from api
-      const fullnameErrors = await validateFormData(
+      const fullnameErrors = await validateSignUpData(
         "fullName",
         signUpForm.fullname.toString().replace(/^\s+|\s+$/gm, ""),
-        "Fullname"
+        "Fullname already taken"
       );
 
       // Validate phone number from api
-      const phoneErrors = await validateFormData(
+      const phoneErrors = await validateSignUpData(
         "phone",
         phoneWithoutPlus,
-        "Phone number"
+        "Phone number already taken"
       );
 
       if (fullnameErrors || phoneErrors) {
@@ -177,17 +156,17 @@ export const UseAuthContextProvider = (props: any) => {
       }
 
       // Validate username from api
-      const userNameErrors = await validateFormData(
+      const userNameErrors = await validateSignUpData(
         "username",
         signUpForm.username.toString().replace(/^\s+|\s+$/gm, ""),
-        "Username"
+        "Username already taken"
       );
 
       // Validate email from api
-      const emailErrors = await validateFormData(
+      const emailErrors = await validateSignUpData(
         "email",
         signUpForm.email.toString().replace(/^\s+|\s+$/gm, ""),
-        "Email"
+        "Email already taken"
       );
 
       if (userNameErrors || emailErrors) {
@@ -236,7 +215,6 @@ export const UseAuthContextProvider = (props: any) => {
     signUpStage,
     bgColor,
     nxtBtnTxt,
-    setCustId,
     isLoading,
   };
 

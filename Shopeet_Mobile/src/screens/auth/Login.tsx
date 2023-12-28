@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -15,87 +15,36 @@ import EyeIcon from "react-native-vector-icons/Entypo";
 import { Images } from "../../resources/Images";
 import AppName from "../../components/AppName";
 import { loginScreenColors } from "../../resources/Colors";
-import { StackActions, useNavigation } from "@react-navigation/native";
+// import { StackActions, useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 import { Image } from "expo-image";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ProtectedRouteContext } from "../../context/ProtectedRoute";
 
 const Login: React.FunctionComponent<{}> = () => {
-  const navigation: any = useNavigation();
+  // const navigation: any = useNavigation();
   const [userNameBorderColor, setUserNameBorderColor] =
     useState<string>("gray");
   const [passWordBorderColor, setPassWordBorderColor] =
     useState<string>("gray");
-  const [tokenValue, setTokenValue] = useState<string | null>("");
-
-  //form data state for username & password
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
-  //username and password for input focus
-  const username_ref = useRef<any>(null);
-  const password_ref = useRef<any>(null);
-
-  //to clear toast message
-  const [isShow, setIsShow] = useState<boolean>(false);
-  const timeOutMsg = (timeOutVal: number) => {
-    setIsShow(true);
-    const timer = setTimeout(() => {
-      setIsShow(false);
-      clearTimeout(timer);
-    }, timeOutVal);
-  };
+  // const [submittedVal, setSubmittedVal] = useState<boolean>();
+  const {
+    // submitted,
+    formData,
+    setFormData,
+    Login,
+    username_ref,
+    password_ref,
+  } = useContext(ProtectedRouteContext);
 
   //handleSignUp
-  const SignUp = () => {
-    navigation.dispatch(StackActions.replace("SignUpContext", {}));
-  };
+  // const SignUp = () => {
+  //   navigation.dispatch(StackActions.replace("SignUpContext", {}));
+  // };
 
-  //handleLogin
-  const Login = () => {
-    if (!formData.username.trim()) {
-      Toast.show({
-        type: "error",
-        text1: "Login error",
-        text2: "Invalid username",
-      });
-      username_ref.current.focus();
-      return null;
-    }
-    if (!formData.password.trim()) {
-      Toast.show({
-        type: "error",
-        text1: "Login error",
-        text2: "Invalid password",
-      });
-      password_ref.current.focus();
-      return null;
-    } else {
-      Toast.show({
-        type: "success",
-        text1: "Login successful",
-        text2: "Congratulations",
-      });
-      console.log(formData.username + " " + formData.password);
-      navigation.dispatch(StackActions.replace("Home", {}));
-    }
-  };
-
-  const onPageLoad = async () => {
-    const token: string | null = await AsyncStorage.getItem("@userData");
-    const parsedToken = JSON.parse(token!);
-    if (parsedToken.submitted === false) {
-      setTokenValue("");
-    } else {
-      //take me to home screen if there is token
-      setTokenValue(parsedToken);
-    }
-  };
-
-  useEffect(() => {
-    onPageLoad();
-  }, []);
+  // useEffect(() => {
+  //   setSubmittedVal(submitted);
+  //   console.log(submitted);
+  // }, [submitted]);
 
   return (
     <>
@@ -135,7 +84,7 @@ const Login: React.FunctionComponent<{}> = () => {
                   style={loginScreenStyle.textInputIcon}
                 />
                 <TextInput
-                  placeholder='username or email'
+                  placeholder='username'
                   style={[
                     loginScreenStyle.textInput,
                     {
@@ -203,7 +152,7 @@ const Login: React.FunctionComponent<{}> = () => {
                   <Text style={loginScreenStyle.buttonText}>Continue</Text>
                 </TouchableOpacity>
               </View>
-              {!tokenValue ? (
+              {/* {submittedVal === false ? (
                 <View style={loginScreenStyle.bottomTextView}>
                   <Text style={loginScreenStyle.bottomText}>
                     Don't have an account,{" "}
@@ -217,7 +166,7 @@ const Login: React.FunctionComponent<{}> = () => {
                     </Text>
                   </TouchableOpacity>
                 </View>
-              ) : null}
+              ) : null} */}
             </View>
           </KeyboardAvoidingView>
         </ScrollView>

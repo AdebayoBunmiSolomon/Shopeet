@@ -17,37 +17,13 @@ import {
 
 const SignUp: React.FunctionComponent<{}> = () => {
   const navigation: any = useNavigation();
-  const { signUp, signUpStage, bgColor, nxtBtnTxt, setCustId } =
+  const { signUp, signUpStage, bgColor, nxtBtnTxt } =
     useContext(UseAuthContext);
   const [isLengthLoading, setIsLengthLoading] = useState<boolean>(true);
 
   const nextSubmit = () => {
     signUp();
   };
-
-  const getLengthOfCustomerFromServer = async () => {
-    setIsLengthLoading(true);
-    try {
-      setIsLengthLoading(true);
-      const { status, data } = await GetRequest(`${url}customers`, axiosConfig);
-      if (status === 200 && data && data.length > 0) {
-        setCustId(data.length + 1);
-        setIsLengthLoading(false);
-        return false;
-      } else {
-        setCustId(0);
-        setIsLengthLoading(true);
-      }
-    } catch (err) {
-      console.log("Error fetching customer length", err);
-      setCustId(0);
-      setIsLengthLoading(true);
-    }
-  };
-
-  useEffect(() => {
-    getLengthOfCustomerFromServer();
-  }, []);
 
   return (
     <View
@@ -127,9 +103,7 @@ const SignUp: React.FunctionComponent<{}> = () => {
           onPress={() => {
             nextSubmit();
           }}>
-          <Text style={signUpScreenStyle.bottomBtnText}>
-            {!isLengthLoading ? nxtBtnTxt : "Loading..."}
-          </Text>
+          <Text style={signUpScreenStyle.bottomBtnText}>{nxtBtnTxt}</Text>
         </TouchableOpacity>
       </View>
     </View>

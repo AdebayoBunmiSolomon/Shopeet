@@ -13,6 +13,7 @@ import Loader from "../../../components/Loader";
 import { Image } from "expo-image";
 import Octicons from "react-native-vector-icons/Octicons";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
+import { formatProductPrice } from "../../../resources/utils/functions";
 
 const Cart: React.FunctionComponent<{}> = () => {
   const navigation: any = useNavigation();
@@ -24,12 +25,7 @@ const Cart: React.FunctionComponent<{}> = () => {
   const [lengthOfCustomerCart, setLengthOfCustomerCart] = useState<number>();
   const [totalPriceOfProductLoading, setTotalPriceOfProductLoading] =
     useState<boolean>(true);
-  const { customerCart } = useContext(ShopContext);
-  let [prodCount, setProdCount] = useState<any>();
-
-  const formatProductPrice = (price: number) => {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
+  const { customerCart, removeFromCart } = useContext(ShopContext);
 
   const cartModal = () => {
     navigation.navigate("CartModal");
@@ -47,7 +43,7 @@ const Cart: React.FunctionComponent<{}> = () => {
         setCartLoading(true);
         if (customerProdInCart !== null) {
           setCustomerProductInCart(customerProdInCart);
-          calculateTotalPriceOfProduct();
+          calculateTotalPriceOfProduct(customerProdInCart);
           setCartLoading(false);
         } else {
           setCustomerProductInCart(null);
@@ -63,14 +59,14 @@ const Cart: React.FunctionComponent<{}> = () => {
     }
   };
 
-  const calculateTotalPriceOfProduct = () => {
+  const calculateTotalPriceOfProduct = (gottenCustomerProdInCart: any) => {
     try {
       setTotalPriceOfProductLoading(true);
-      if (customerProductInCart && customerProductInCart.length > 0) {
-        const priceOfProd = customerProductInCart.map(
+      if (gottenCustomerProdInCart && gottenCustomerProdInCart.length > 0) {
+        const priceOfProd = gottenCustomerProdInCart.map(
           (products: any) => products.price * products.countOfProd
         );
-        const totalItemsInCart = customerProductInCart.map(
+        const totalItemsInCart = gottenCustomerProdInCart.map(
           (products: any) => products.countOfProd
         );
 
@@ -103,7 +99,7 @@ const Cart: React.FunctionComponent<{}> = () => {
       loadCustomerProductInCart();
     };
     load();
-  }, [isFocused, cartLoading]);
+  }, [isFocused, cartLoading, customerCart]);
 
   return (
     <View>
@@ -156,7 +152,11 @@ const Cart: React.FunctionComponent<{}> = () => {
                           </View>
                         </View>
                         <View>
-                          <TouchableOpacity style={cartStyle.trashBtn}>
+                          <TouchableOpacity
+                            style={cartStyle.trashBtn}
+                            onPress={() => {
+                              removeFromCart(item.productId);
+                            }}>
                             <Octicons
                               name='trash'
                               size={Platform.OS === "ios" ? 35 : 30}
@@ -170,9 +170,7 @@ const Cart: React.FunctionComponent<{}> = () => {
                 </>
               ) : (
                 <View style={cartStyle.noCartContainer}>
-                  <Text style={cartStyle.noCartText}>
-                    You currently do not have any item in cart(s)
-                  </Text>
+                  <Text style={cartStyle.noCartText}>Your cart is empty</Text>
                 </View>
               )}
             </>
@@ -207,7 +205,11 @@ const Cart: React.FunctionComponent<{}> = () => {
             {totalTotalItemsInCart}
           </Text>
         </View>
-        <TouchableOpacity style={cartStyle.paymentBtn}>
+        <TouchableOpacity
+          style={cartStyle.paymentBtn}
+          onPress={() => {
+            navigation.navigate("Payment", { totalPriceOfProduct });
+          }}>
           <Text style={cartStyle.paymentBtnText}>Process payment</Text>
           <Text style={cartStyle.paymentBtnText}>
             ${" "}

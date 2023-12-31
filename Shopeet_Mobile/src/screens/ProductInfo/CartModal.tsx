@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Image } from "expo-image";
 import Entypo from "react-native-vector-icons/Entypo";
 import { ShopContext } from "../../context/Auth/shopContext";
+import { formatProductPrice } from "../../resources/utils/functions";
 
 const CartModal: React.FunctionComponent<{}> = () => {
   const navigation: any = useNavigation();
@@ -20,10 +21,6 @@ const CartModal: React.FunctionComponent<{}> = () => {
   const [customerProductInCart, setCustomerProductInCart] = useState<any>();
   const { customerCart } = useContext(ShopContext);
   let [prodCount, setProdCount] = useState<any>();
-
-  const formatProductPrice = (price: number) => {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
 
   useEffect(() => {
     loadCustomerProductInCart();

@@ -6,7 +6,6 @@ import { searchStyle } from "./Style";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
-import { productList } from "../../../resources/utils/Product";
 import Loader from "../../../components/Loader";
 import Products from "../../../components/cards/Products";
 import { useNavigation } from "@react-navigation/native";

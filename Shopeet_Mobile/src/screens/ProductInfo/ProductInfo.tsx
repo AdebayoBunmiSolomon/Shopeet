@@ -26,6 +26,7 @@ import {
   axiosConfig,
   url,
 } from "../../context/Auth/hooks/useRequest";
+import { formatProductPrice } from "../../resources/utils/functions";
 
 const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
   const { productId } = props.route.params;
@@ -39,6 +40,7 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
   const [openReview, setOpenReview] = useState<boolean>(false);
   const [countOfSpecificProdInCart, setCountOfSpecificProdInCart] =
     useState<number>(1);
+  const [productExistInCart, setProductExistInCart] = useState<boolean>(false);
   const { addToCart, customerCart, addToCartLoading } = useContext(ShopContext);
   let [newProdPrice, setNewProdPrice] = useState<any>();
   const changeLikeActivity = () => {
@@ -47,10 +49,6 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
 
   const showReview = () => {
     setOpenReview(!openReview);
-  };
-
-  const formatProductPrice = (price: number) => {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   const productReview = () => {
@@ -77,22 +75,25 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
           setCountOfSpecificProdInCart(
             countOfSpecificProductInCart[0].countOfProd
           );
+          setProductExistInCart(true);
         } else {
           setCountOfSpecificProdInCart(1);
+          setProductExistInCart(false);
         }
       } catch (err) {
         console.log(err);
         setCountOfSpecificProdInCart(1);
+        setProductExistInCart(false);
       }
     }
   };
 
   //load product information
-  const loadProductInfo = async () => {
+  const loadProductInfo = async (productIdVal: number) => {
     setIsLoading(true);
     //make get request
     const { status, data } = await GetRequest(
-      `${url}products?id=${productId}`,
+      `${url}products?id=${productIdVal}`,
       axiosConfig
     );
     try {
@@ -100,8 +101,8 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
       setIsLoading(true);
       if (status === 200) {
         setProductInfo(data);
-        loadProductImage(productId);
-        loadCountOfSpecificProductInCart(productId, 1);
+        loadProductImage(productIdVal);
+        loadCountOfSpecificProductInCart(productIdVal, 1);
         setIsLoading(false);
       } else {
         //set data back to null if data not loaded correctly...
@@ -153,10 +154,10 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
 
   useEffect(() => {
     const load = () => {
-      loadProductInfo();
+      loadProductInfo(productId);
     };
     load();
-  }, [isFocused]);
+  }, [isFocused, productId]);
 
   return (
     <>
@@ -389,7 +390,9 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
           {addToCartLoading === true ? (
             <Text style={productInfoStyle.bottomBtnText}>Loading</Text>
           ) : (
-            <Text style={productInfoStyle.bottomBtnText}>Add to cart</Text>
+            <Text style={productInfoStyle.bottomBtnText}>
+              {productExistInCart === true ? "Update cart" : "Add to cart"}
+            </Text>
           )}
         </TouchableOpacity>
       </View>

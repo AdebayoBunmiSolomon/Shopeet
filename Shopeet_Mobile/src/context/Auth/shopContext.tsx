@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { Alert } from "react-native";
 import Toast from "react-native-toast-message";
 
 //empty customer cart
@@ -17,7 +18,7 @@ export const ShopContext = createContext<any>(null);
 export const ShopContextProvider = (props: any) => {
   const [selectedCollection, setSelectedCollection] =
     useState<string>("Product");
-  const [customerCart, setCustomerCart] = useState<any>();
+  const [customerCart, setCustomerCart] = useState<any>(customerBasket);
   const [customerCartLength, setCustomerCartLength] = useState<any>(0);
   const [addToCartLoading, setAddToCartLoading] = useState<boolean>(false);
 
@@ -34,18 +35,25 @@ export const ShopContextProvider = (props: any) => {
     gottenPrice: number,
     countOfProd: number
   ) => {
-    if (customerBasket && customerBasket.length > 0) {
-      const product = customerBasket.filter(
+    if (customerCart && customerCart.length > 0) {
+      const product = customerCart.filter(
         (prodItem: any) => prodItem.productId === gottenProdId
       );
       if (product && product.length > 0) {
+        updateProductInCart(
+          gottenProdId,
+          gottenCustomerId,
+          gottenImage,
+          gottenPrice,
+          countOfProd
+        );
         Toast.show({
           type: "info",
           text1: "Cart Information",
           text2: "cart updated successfully",
         });
       } else {
-        pushProductToBasket(
+        pushProductToCart(
           gottenCustomerId,
           gottenProdId,
           gottenImage,
@@ -59,12 +67,34 @@ export const ShopContextProvider = (props: any) => {
         });
       }
     }
-    setCustomerCart(customerBasket);
+    // setCustomerCart(customerBasket);
     getLengthOfCustomerCart(gottenCustomerId);
   };
 
+  //update product in cart
+  const updateProductInCart = (
+    gottenProdId: number,
+    gottenCustomerId: number,
+    gottenImage: string,
+    gottenPrice: number,
+    countOfProd: number
+  ) => {
+    const productItem = customerCart.filter(
+      (cartItem: any) => gottenProdId !== cartItem.productId
+    );
+    productItem.push({
+      customerId: gottenCustomerId,
+      productId: gottenProdId,
+      image: gottenImage,
+      price: gottenPrice,
+      countOfProd: countOfProd,
+    });
+    const updatedCart = productItem;
+    setCustomerCart(updatedCart);
+  };
+
   //push product to basket
-  const pushProductToBasket = (
+  const pushProductToCart = (
     gottenCustomerId: number,
     gottenProdId: number,
     gottenImage: string,
@@ -72,7 +102,7 @@ export const ShopContextProvider = (props: any) => {
     countOfProd: number
   ) => {
     try {
-      customerBasket.push({
+      customerCart.push({
         customerId: gottenCustomerId,
         productId: gottenProdId,
         image: gottenImage,
@@ -82,6 +112,29 @@ export const ShopContextProvider = (props: any) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const removeFromCart = (gottenProdId: number) => {
+    Alert.alert("Cart", "Are you sure you remove item", [
+      {
+        text: "Yes",
+        onPress: () => {
+          if (customerCart && customerCart.length > 0) {
+            const remainingProduct = customerCart.filter(
+              (cartItems: any) => gottenProdId !== cartItems.productId
+            );
+            console.log(remainingProduct);
+            setCustomerCart(remainingProduct);
+          }
+        },
+      },
+      {
+        text: "No",
+        onPress: () => {
+          console.log("No pressed");
+        },
+      },
+    ]);
   };
 
   //get length of customer product in cart
@@ -111,6 +164,7 @@ export const ShopContextProvider = (props: any) => {
     getLengthOfCustomerCart,
     customerCart,
     addToCartLoading,
+    removeFromCart,
   };
 
   return (

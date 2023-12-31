@@ -86,3 +86,8 @@ export const storeUserDataInDevice = async (submittedVal:boolean, deviceImeiVal:
   };
   await AsyncStorage.setItem("@userData", JSON.stringify(userData));
 }
+
+//add comma to number values
+export const formatProductPrice = (price: number) => {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};

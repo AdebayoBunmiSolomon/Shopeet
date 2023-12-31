@@ -9,6 +9,7 @@ import ProductInfo from "../screens/ProductInfo/ProductInfo";
 import { ShopContextProvider } from "../context/Auth/shopContext";
 import ProductReview from "../screens/ProductInfo/ProductReview";
 import CartModal from "../screens/ProductInfo/CartModal";
+import Payment from "../screens/Payment";
 
 const Stack = createNativeStackNavigator();
 const Modal = createNativeStackNavigator();
@@ -75,6 +76,15 @@ const Screen: React.FunctionComponent<{}> = () => {
               options={{
                 presentation: "transparentModal",
                 animation: "slide_from_bottom",
+                animationDuration: 100,
+              }}
+            />
+            <Modal.Screen
+              name='Payment'
+              component={Payment}
+              options={{
+                presentation: "transparentModal",
+                animation: "fade_from_bottom",
                 animationDuration: 100,
               }}
             />

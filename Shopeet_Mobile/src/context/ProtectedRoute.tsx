@@ -1,4 +1,4 @@
-import React, { createContext, useState, useRef } from "react";
+import React, { createContext, useState, useRef, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation, StackActions } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
@@ -51,6 +51,10 @@ export const ProtectedRouteContextProvider = (props: any) => {
       setDeviceImei(parsedData.deviceImei);
     }
   };
+
+  useEffect(() => {
+    console.log(token);
+  }, [token]);
 
   const Login = async () => {
     //username validation

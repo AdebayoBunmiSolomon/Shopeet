@@ -8,7 +8,6 @@ import {
 import { signUpScreenColors } from "../../../resources/Colors";
 import * as EmailValidator from "email-validator";
 import { useNavigation, StackActions } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
 
 export const UseAuthContext = createContext<any>(null);

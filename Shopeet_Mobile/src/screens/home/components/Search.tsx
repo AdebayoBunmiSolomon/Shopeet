@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
 import { Images } from "../../../resources/Images";
 import { Image } from "expo-image";
 import { searchStyle } from "./Style";
@@ -17,33 +17,77 @@ const Search: React.FunctionComponent<{}> = () => {
   const [dataCount, setDataCount] = useState<number | string>();
   const [isProductLoading, setIsProductLoading] = useState<boolean>(true);
   const navigation: any = useNavigation();
-  const { selectedCollection } = useContext(ShopContext);
+  const { selectedCollection, token } = useContext(ShopContext);
+  const [searchValue, setSearchValue] = useState<string>();
+  const [searchedProducts, setSearchedProducts] = useState<any>();
 
   const openCollectionModal = () => {
     navigation.navigate("Collection");
   };
 
+  const axiosConfig = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   const loadProductData = async () => {
+    setSearchValue("");
     setIsProductLoading(true);
     //make get request
-    const { status, data } = await GetRequest(`${url}products`, undefined);
+    const { status, data } = await GetRequest(`${url}products`, axiosConfig);
     try {
       //load data after get request is made.
       setIsProductLoading(true);
       if (status === 200) {
+        setSearchedProducts(null);
         setProductData(data);
         setDataCount(data.length);
         setIsProductLoading(false);
       } else {
         //set data back to null if data not loaded correctly...
         setDataCount("...");
+        setSearchedProducts(null);
         setProductData(null);
         setIsProductLoading(true);
       }
     } catch (err) {
       setDataCount("...");
+      setSearchedProducts(null);
       setProductData(null);
       setIsProductLoading(true);
+    }
+  };
+
+  const showAll = async () => {
+    await loadProductData();
+  };
+
+  const findProducts = async () => {
+    setIsProductLoading(true);
+    try {
+      setIsProductLoading(true);
+      const { status, data } = await GetRequest(
+        `${url}products?name_like=${searchValue}`,
+        axiosConfig
+      );
+      if (status === 200 && data && data.length > 0) {
+        setProductData(null);
+        setSearchedProducts(data);
+        setDataCount(data.length);
+        setIsProductLoading(false);
+      } else {
+        setProductData(null);
+        setSearchedProducts(null);
+        setDataCount("...");
+        console.log("No product like", searchValue);
+        setIsProductLoading(true);
+      }
+    } catch (err) {
+      setSearchedProducts(null);
+      setDataCount("...");
+      console.log("Error fetching product data", err);
     }
   };
 
@@ -71,8 +115,16 @@ const Search: React.FunctionComponent<{}> = () => {
               }}
             />
             <TextInput
-              placeholder='search products here...'
+              placeholder='search by product name here...'
               style={searchStyle.searchTextInput}
+              onChangeText={(searchText: string) => {
+                if (!searchText.trim()) {
+                  loadProductData();
+                } else {
+                  setSearchValue(searchText);
+                  //don't do anything
+                }
+              }}
             />
           </View>
           {/* filter button beside text input */}
@@ -92,7 +144,9 @@ const Search: React.FunctionComponent<{}> = () => {
         </View>
         {/*find button */}
         <View>
-          <TouchableOpacity style={searchStyle.searchFindBtn}>
+          <TouchableOpacity
+            style={searchStyle.searchFindBtn}
+            onPress={() => findProducts()}>
             <Text style={searchStyle.searchFindBtnText}>find products</Text>
           </TouchableOpacity>
         </View>
@@ -110,13 +164,26 @@ const Search: React.FunctionComponent<{}> = () => {
         <Text style={searchStyle.productCountText}>
           {selectedCollection} {`(${!isProductLoading ? dataCount : "..."})`}
         </Text>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            showAll();
+          }}>
           <Text style={searchStyle.showAllText}>Show all</Text>
         </TouchableOpacity>
       </View>
       {/* Product card */}
       <View style={searchStyle.productListView}>
-        {!isProductLoading ? <Products data={productData} /> : <Loader />}
+        {!isProductLoading ? (
+          <Products
+            data={
+              productData && productData.length > 0
+                ? productData
+                : searchedProducts
+            }
+          />
+        ) : (
+          <Loader />
+        )}
       </View>
     </View>
   );

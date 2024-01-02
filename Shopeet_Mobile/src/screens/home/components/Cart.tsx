@@ -13,7 +13,11 @@ import Loader from "../../../components/Loader";
 import { Image } from "expo-image";
 import Octicons from "react-native-vector-icons/Octicons";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
-import { formatProductPrice } from "../../../resources/utils/functions";
+import {
+  formatProductPrice,
+  truncateText,
+} from "../../../resources/utils/functions";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const Cart: React.FunctionComponent<{}> = () => {
   const navigation: any = useNavigation();
@@ -43,7 +47,7 @@ const Cart: React.FunctionComponent<{}> = () => {
         setCartLoading(true);
         if (customerProdInCart !== null) {
           setCustomerProductInCart(customerProdInCart);
-          calculateTotalPriceOfProduct(customerProdInCart);
+          calculateTotalPriceOfProduct(customerCart);
           setCartLoading(false);
         } else {
           setCustomerProductInCart(null);
@@ -72,7 +76,7 @@ const Cart: React.FunctionComponent<{}> = () => {
 
         const arr = priceOfProd;
         const arr2 = totalItemsInCart;
-        const length = priceOfProd.length;
+        const length = priceOfProd.length - 1;
         let sum = 0;
         for (let i = 0; i < arr.length; i++) {
           sum += arr[i];
@@ -132,7 +136,9 @@ const Cart: React.FunctionComponent<{}> = () => {
                       />
                       <View style={cartStyle.listContentContainer}>
                         <View style={cartStyle.listContentView}>
-                          <Text>Name of Product</Text>
+                          <Text style={cartStyle.productListName}>
+                            {truncateText(item.prodName)}
+                          </Text>
                           <View style={cartStyle.innerListContentView}>
                             <Text>
                               <Text style={cartStyle.countText}>
@@ -170,7 +176,19 @@ const Cart: React.FunctionComponent<{}> = () => {
                 </>
               ) : (
                 <View style={cartStyle.noCartContainer}>
-                  <Text style={cartStyle.noCartText}>Your cart is empty</Text>
+                  <TouchableOpacity style={cartStyle.container}>
+                    <View style={{ flexDirection: "row" }}>
+                      <View style={cartStyle.cartCountView}>
+                        <Text style={cartStyle.cartCountText}>0</Text>
+                      </View>
+                      <FontAwesome
+                        name='shopping-cart'
+                        size={Platform.OS === "ios" ? 150 : 140}
+                        color={"#c2b9b95e"}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                  {/* <Text style={cartStyle.noCartText}>Your cart is empty</Text> */}
                 </View>
               )}
             </>

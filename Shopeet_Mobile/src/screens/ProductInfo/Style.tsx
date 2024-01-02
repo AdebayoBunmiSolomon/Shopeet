@@ -362,6 +362,7 @@ export const cartModalStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
+    gap: 5,
   },
   listContentMinusBtn: {
     justifyContent: "center",
@@ -398,5 +399,10 @@ export const cartModalStyles = StyleSheet.create({
     fontFamily: "RobotoCondensed-Bold",
     color: "white",
     fontSize: Platform.OS === "ios" ? 19 : 16,
+  },
+  productListName: {
+    alignSelf: "center",
+    fontSize: Platform.OS === "ios" ? 16 : 14,
+    fontFamily: "RobotoCondensed-Bold",
   },
 });

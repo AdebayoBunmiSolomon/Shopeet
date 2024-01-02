@@ -27,9 +27,18 @@ const Payment: React.FunctionComponent<{}> = (props: any) => {
               style={paymentStyles.locationInput}
             />
             <View style={paymentStyles.btnView}>
-              <TouchableOpacity style={paymentStyles.continueBtn}>
-                <Text style={paymentStyles.btnText}>Continue</Text>
-              </TouchableOpacity>
+              {Number(totalPriceOfProduct) > 0 ? (
+                <TouchableOpacity style={paymentStyles.continueBtn}>
+                  <Text style={paymentStyles.btnText}>Continue</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={[paymentStyles.continueBtn, { backgroundColor: "" }]}>
+                  <Text style={[paymentStyles.btnText, { color: "gray" }]}>
+                    Oops, nothing to pay for
+                  </Text>
+                </TouchableOpacity>
+              )}
               <TouchableOpacity
                 style={paymentStyles.closeBtn}
                 onPress={() => {

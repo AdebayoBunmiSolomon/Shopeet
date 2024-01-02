@@ -91,3 +91,8 @@ export const storeUserDataInDevice = async (submittedVal:boolean, deviceImeiVal:
 export const formatProductPrice = (price: number) => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+//truncate long string values greater than 15
+export const truncateText = (str: string) => {
+  return str.length > 15 ? str.substring(0, 15) + "...." : str;
+};

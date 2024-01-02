@@ -6,14 +6,11 @@ import { productListStyle } from "./Style";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { AirbnbRating } from "react-native-ratings";
 import { useNavigation } from "@react-navigation/native";
+import { truncateText } from "../../resources/utils/functions";
 
 const Products: React.FunctionComponent<cardProps> = ({ data }) => {
   const productList = data;
   const navigation: any = useNavigation();
-
-  const truncateText = (str: string) => {
-    return str.length > 15 ? str.substring(0, 15) + "...." : str;
-  };
 
   const buyProduct = (productId: number) => {
     navigation.navigate("ProductInfo", { productId });

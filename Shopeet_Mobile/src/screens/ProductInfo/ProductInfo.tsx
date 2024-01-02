@@ -71,7 +71,7 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
           specificProduct.customerId === gottenCustomerId
       );
       try {
-        if (countOfSpecificProductInCart !== null) {
+        if (countOfSpecificProductInCart && countOfSpecificProdInCart !== 0) {
           setCountOfSpecificProdInCart(
             countOfSpecificProductInCart[0].countOfProd
           );
@@ -381,6 +381,7 @@ const ProductInfo: React.FunctionComponent<{}> = (props: any) => {
           onPress={() => {
             addToCart(
               productId,
+              productInfo[0].name,
               1,
               prodImgList[0].image,
               !newProdPrice ? productInfo[0].price : newProdPrice,

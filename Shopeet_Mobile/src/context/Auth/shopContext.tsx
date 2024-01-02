@@ -7,6 +7,7 @@ const customerBasket = [
   {
     customerId: 0,
     productId: 0,
+    prodName: "",
     image: "",
     price: 0,
     countOfProd: 0,
@@ -30,6 +31,7 @@ export const ShopContextProvider = (props: any) => {
   //add particular product to cart
   const addToCart = (
     gottenProdId: number,
+    gottenProdName: string,
     gottenCustomerId: number,
     gottenImage: string,
     gottenPrice: number,
@@ -42,6 +44,7 @@ export const ShopContextProvider = (props: any) => {
       if (product && product.length > 0) {
         updateProductInCart(
           gottenProdId,
+          gottenProdName,
           gottenCustomerId,
           gottenImage,
           gottenPrice,
@@ -56,6 +59,7 @@ export const ShopContextProvider = (props: any) => {
         pushProductToCart(
           gottenCustomerId,
           gottenProdId,
+          gottenProdName,
           gottenImage,
           gottenPrice,
           countOfProd
@@ -74,6 +78,7 @@ export const ShopContextProvider = (props: any) => {
   //update product in cart
   const updateProductInCart = (
     gottenProdId: number,
+    gottenProdName: string,
     gottenCustomerId: number,
     gottenImage: string,
     gottenPrice: number,
@@ -85,6 +90,7 @@ export const ShopContextProvider = (props: any) => {
     productItem.push({
       customerId: gottenCustomerId,
       productId: gottenProdId,
+      prodName: gottenProdName,
       image: gottenImage,
       price: gottenPrice,
       countOfProd: countOfProd,
@@ -97,6 +103,7 @@ export const ShopContextProvider = (props: any) => {
   const pushProductToCart = (
     gottenCustomerId: number,
     gottenProdId: number,
+    gottenProdName: string,
     gottenImage: string,
     gottenPrice: number,
     countOfProd: number
@@ -105,6 +112,7 @@ export const ShopContextProvider = (props: any) => {
       customerCart.push({
         customerId: gottenCustomerId,
         productId: gottenProdId,
+        prodName: gottenProdName,
         image: gottenImage,
         price: gottenPrice,
         countOfProd: countOfProd,

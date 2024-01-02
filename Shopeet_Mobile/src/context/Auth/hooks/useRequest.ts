@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export const url = 'http://192.168.43.146:8000/';
+export const url = 'http://192.168.223.35:8000/';
 
 export const axiosConfig = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer your_access_token",
+      Authorization: `Bearer ...`,
     },
   };
 

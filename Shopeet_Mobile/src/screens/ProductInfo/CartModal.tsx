@@ -13,7 +13,10 @@ import { useNavigation } from "@react-navigation/native";
 import { Image } from "expo-image";
 import Entypo from "react-native-vector-icons/Entypo";
 import { ShopContext } from "../../context/Auth/shopContext";
-import { formatProductPrice } from "../../resources/utils/functions";
+import {
+  formatProductPrice,
+  truncateText,
+} from "../../resources/utils/functions";
 
 const CartModal: React.FunctionComponent<{}> = () => {
   const navigation: any = useNavigation();
@@ -96,7 +99,9 @@ const CartModal: React.FunctionComponent<{}> = () => {
                                 justifyContent: "center",
                                 gap: 7,
                               }}>
-                              <Text>Name of Product</Text>
+                              <Text style={cartModalStyles.productListName}>
+                                {truncateText(item.prodName)}
+                              </Text>
                               <View style={cartModalStyles.listContentView}>
                                 <TouchableOpacity
                                   style={cartModalStyles.listContentMinusBtn}

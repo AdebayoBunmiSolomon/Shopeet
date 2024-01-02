@@ -184,6 +184,25 @@ export const cartStyle = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cartCountView: {
+    position: "absolute",
+    zIndex: 1,
+    backgroundColor: "#c2b9b9a6",
+    borderRadius: Platform.OS === "ios" ? 60 : 50,
+    marginTop: -10,
+    marginLeft: -5,
+  },
+  cartCountText: {
+    color: "white",
+    paddingHorizontal: 15,
+    paddingVertical: 1,
+    fontFamily: "RobotoCondensed-Bold",
+    fontSize: Platform.OS === "ios" ? 40 : 33,
+  },
   noCartText: {
     color: "#E77602",
     fontFamily: "RobotoCondensed-Bold",
@@ -268,5 +287,11 @@ export const cartStyle = StyleSheet.create({
     fontFamily: "RobotoCondensed-Bold",
     color: "white",
     fontSize: Platform.OS === "ios" ? 19 : 16,
+  },
+  productListName: {
+    fontSize: Platform.OS === "ios" ? 16 : 14,
+    fontFamily: "RobotoCondensed-Bold",
+    color: "gray",
+    opacity: 0.9,
   },
 });

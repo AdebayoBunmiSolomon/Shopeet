@@ -1,6 +1,6 @@
 {
   "headers": {
-    "Access-Control-Allow-Origin": "exp://192.168.43.146:8081",
+    "Access-Control-Allow-Origin": "exp://192.168.223.35:8081",
     "Access-Control-Allow-Headers": "Content-Type, Authorization"
   },
   "admins": [
@@ -11,7 +11,107 @@
       "password": "adebunmy1234"
     }
   ],
-  "carts": [],
+  "carts": [
+    {
+      "id": "testing",
+      "customerId": "testing",
+      "customerEmail": "",
+      "customerPhone": "",
+      "productId": "0",
+      "prodName": "",
+      "image": "",
+      "price": 0,
+      "countOfProd": 0
+    },
+    {
+      "id": "3f07ce3e-9d5f-4cdb-a202-6910af018c6c",
+      "customerId": "33d7265f-0a7a-4967-993f-cccbd9f1c166",
+      "customerEmail": "adebayobunmisolomon@gmail.com",
+      "customerPhone": "2348152282617",
+      "productId": 7,
+      "prodName": "FURGLE Chair For Gaming & Programming",
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/18/5088601/1.jpg?3368",
+      "price": 185000,
+      "countOfProd": 1
+    },
+    {
+      "id": "a14dc71f-411b-49a1-986a-baf1ccad357d",
+      "customerId": "33d7265f-0a7a-4967-993f-cccbd9f1c166",
+      "customerEmail": "adebayobunmisolomon@gmail.com",
+      "customerPhone": "2348152282617",
+      "productId": 1,
+      "prodName": "Men's Jeans",
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/80/0337112/1.jpg?0462",
+      "price": 500,
+      "countOfProd": 3
+    },
+    {
+      "id": "42a5ecb4-7543-4b66-8fa5-aa8b99d1267e",
+      "customerId": "33d7265f-0a7a-4967-993f-cccbd9f1c166",
+      "customerEmail": "adebayobunmisolomon@gmail.com",
+      "customerPhone": "2348152282617",
+      "productId": 6,
+      "prodName": "Shower Gel",
+      "image": "https://ng.jumia.is/unsafe/fit-in/150x150/filters:fill(white)/product/55/0079531/1.jpg?8016",
+      "price": 270000,
+      "countOfProd": 1
+    },
+    {
+      "id": "60390e33-da4f-48dc-b115-504b0128f98e",
+      "customerId": "33d7265f-0a7a-4967-993f-cccbd9f1c166",
+      "customerEmail": "adebayobunmisolomon@gmail.com",
+      "customerPhone": "2348152282617",
+      "productId": 1,
+      "prodName": "Men's Jeans",
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/80/0337112/1.jpg?0462",
+      "price": 500,
+      "countOfProd": 4
+    },
+    {
+      "id": "c9e0b2e5-3cb1-405e-b00c-f8b379307c86",
+      "customerId": "33d7265f-0a7a-4967-993f-cccbd9f1c166",
+      "customerEmail": "adebayobunmisolomon@gmail.com",
+      "customerPhone": "2348152282617",
+      "productId": 2,
+      "prodName": "Men's Top",
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/12/2939552/1.jpg?1287",
+      "price": 1000,
+      "countOfProd": 3
+    },
+    {
+      "id": "fd51a0fa-8ffd-4e21-83f6-c72b0fbd55cf",
+      "customerId": "33d7265f-0a7a-4967-993f-cccbd9f1c166",
+      "customerEmail": "adebayobunmisolomon@gmail.com",
+      "customerPhone": "2348152282617",
+      "productId": 4,
+      "prodName": "Redmi Note 12 Pro",
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/31/4142352/1.jpg?0794",
+      "price": 1000,
+      "countOfProd": 3
+    },
+    {
+      "id": "044379e8-7f57-4317-b219-6e49b0274c5d",
+      "customerId": "33d7265f-0a7a-4967-993f-cccbd9f1c166",
+      "customerEmail": "adebayobunmisolomon@gmail.com",
+      "customerPhone": "2348152282617",
+      "productId": 1,
+      "prodName": "Men's Jeans",
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/80/0337112/1.jpg?0462",
+      "price": 500,
+      "countOfProd": 4
+    },
+    {
+      "id": "0c00c8dc-57a1-4305-ad8d-09ca5cb51089",
+      "customerId": "33d7265f-0a7a-4967-993f-cccbd9f1c166",
+      "customerEmail": "adebayobunmisolomon@gmail.com",
+      "customerPhone": "2348152282617",
+      "productId": 2,
+      "prodName": "Men's Top",
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/12/2939552/1.jpg?1287",
+      "price": 1000,
+      "countOfProd": 7
+    }
+  ],
   "customers": [
     {
       "id": "f4a1bc9e-b5cd-479f-8451-709a329f23f9",
@@ -24,14 +124,14 @@
       "deviceImei": "f4a1bc9e-b5cd-479f-8451-709a329f23f9"
     },
     {
-      "id": "24388d49-850a-4ff7-ba33-77fff9de1907",
+      "id": "33d7265f-0a7a-4967-993f-cccbd9f1c166",
       "fullName": "adebayo bunmi solomon",
       "phone": "2348152282617",
       "username": "adebunmy",
       "email": "adebayobunmisolomon@gmail.com",
       "password": "Solo41526374",
       "deviceName": "TECNO KD7",
-      "deviceImei": "24388d49-850a-4ff7-ba33-77fff9de1907"
+      "deviceImei": "33d7265f-0a7a-4967-993f-cccbd9f1c166"
     }
   ],
   "customerHistory": [],
@@ -105,7 +205,7 @@
       "description": "A style of jeans created for men and the general traits of their anatomy.This generally means that they are looser fitting and have more depth within the crotch.",
       "rating": 5,
       "price": 500,
-      "categoryId": 1,
+      "categoryId": 7,
       "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/80/0337112/1.jpg?0462"
     },
     {
@@ -115,7 +215,7 @@
       "description": "a garment for the upper part of the body: such as. a. : a cloth garment usually having a collar, sleeves, a front opening, and a tail long enough to be tucked inside trousers or a skirt.",
       "rating": 4,
       "price": 1000,
-      "categoryId": 1,
+      "categoryId": 7,
       "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/12/2939552/1.jpg?1287"
     },
     {
@@ -125,7 +225,7 @@
       "description": "For that extra bit of storage you can’t go past this 120L Bar Fridge from Hisense. Its reversible shelves allow it to suit most homes conveniently and its easy clean features and low noise design make this Bar Fridge an ideal solution.Specifications This bar fridge measures 820mm (height) x 515mm (width) x 543 (depth) and has a gross storage capacity of 120L. It has a two star energy rating and has three storage shelves plus a vegetable crisper which is made from tempered glass.Easy to Clean. The shelves are made from tempered glass meaning they’re easier to clean due to their flat surface. The toughened glass is safe to use in the home and reduces the chances of spillage. The door gasket seals are also simple to clean due to the simple method of removing them.",
       "rating": 3,
       "price": 270000,
-      "categoryId": 1,
+      "categoryId": 3,
       "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/53/4842821/1.jpg?6137"
     },
     {
@@ -135,7 +235,7 @@
       "description": "Support 3 refresh rates (60Hz/90Hz/120Hz) for a smoother visual experience and low energy consumption. Enjoy an unbeatably smooth experience with up to 120Hz high refresh rate, whether performing deep in a gaming session or browsing social media.",
       "rating": 2,
       "price": 1000,
-      "categoryId": 1,
+      "categoryId": 4,
       "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/31/4142352/1.jpg?0794"
     },
     {
@@ -145,7 +245,7 @@
       "description": "The Lenovo V14 AMD HD PC is a 14.1-inch laptop with a screen resolution of 220nits. Features 4GB of memory and a 1TB Hard Disk drive. With an AMD A4-3020E processor – 1.2GHz base speed can turbo boost to 2.6. It lacks an optical drive for burning CDs or DVDs for its slim and portable build.",
       "rating": 4,
       "price": 260000,
-      "categoryId": 1,
+      "categoryId": 5,
       "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/47/124177/1.jpg?9117"
     },
     {
@@ -165,7 +265,7 @@
       "description": "Features: one-piece high-density foam: high pressure resistance, strong elasticity and enhanced comfort High quality PU leather: wear resistant, breathable, easy to clean Increase the detachable headrest lumbar pillow: relieve fatigue and protect the neck and spine Tilt Locking mechanism 90-180 degrees angle adjuster",
       "rating": 2,
       "price": 185000,
-      "categoryId": 1,
+      "categoryId": 5,
       "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/18/5088601/1.jpg?3368"
     }
   ],

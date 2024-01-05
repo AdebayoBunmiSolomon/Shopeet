@@ -13,5 +13,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "json-server": "^0.17.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6"
   }
 }

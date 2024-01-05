@@ -134,6 +134,7 @@ export const ProtectedRouteContextProvider = (props: any) => {
     Login,
     username_ref,
     password_ref,
+    token,
   };
 
   return (

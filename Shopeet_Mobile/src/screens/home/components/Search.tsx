@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { Images } from "../../../resources/Images";
 import { Image } from "expo-image";
 import { searchStyle } from "./Style";
@@ -17,7 +17,8 @@ const Search: React.FunctionComponent<{}> = () => {
   const [dataCount, setDataCount] = useState<number | string>();
   const [isProductLoading, setIsProductLoading] = useState<boolean>(true);
   const navigation: any = useNavigation();
-  const { selectedCollection, token } = useContext(ShopContext);
+  const { selectedCollection, token, selectedCollectionId } =
+    useContext(ShopContext);
   const [searchValue, setSearchValue] = useState<string>();
   const [searchedProducts, setSearchedProducts] = useState<any>();
 
@@ -69,7 +70,7 @@ const Search: React.FunctionComponent<{}> = () => {
     try {
       setIsProductLoading(true);
       const { status, data } = await GetRequest(
-        `${url}products?name_like=${searchValue}`,
+        `${url}products?name_like=${searchValue}&categoryId=${selectedCollectionId}`,
         axiosConfig
       );
       if (status === 200 && data && data.length > 0) {

@@ -14,7 +14,7 @@ const CartIcon: React.FunctionComponent<cartIconProps> = ({
 
   useEffect(() => {
     getLengthOfCustomerCart(customerId);
-  }, [customerCart]);
+  }, [customerCart, customerId]);
   return (
     <>
       <View>

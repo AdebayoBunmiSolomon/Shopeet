@@ -36,11 +36,11 @@ const Cart: React.FunctionComponent<{}> = () => {
   };
 
   //get product of customer into cart
-  const loadCustomerProductInCart = () => {
+  const loadCustomerProductInCart = (gottenCustomerCart: any) => {
     setCartLoading(true);
-    if (customerCart && customerCart.length > 0) {
+    if (gottenCustomerCart && gottenCustomerCart.length > 0) {
       setCartLoading(true);
-      const customerProdInCart = customerCart.filter(
+      const customerProdInCart = gottenCustomerCart.filter(
         (certainItem: any) => certainItem.customerId === 1
       );
       try {
@@ -100,7 +100,7 @@ const Cart: React.FunctionComponent<{}> = () => {
 
   useEffect(() => {
     const load = () => {
-      loadCustomerProductInCart();
+      loadCustomerProductInCart(customerCart);
     };
     load();
   }, [isFocused, cartLoading, customerCart]);

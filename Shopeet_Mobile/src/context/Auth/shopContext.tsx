@@ -1,9 +1,13 @@
 import React, { createContext, useState } from "react";
 import { Alert } from "react-native";
 import Toast from "react-native-toast-message";
+import { PostRequest, axiosConfig, url } from "./hooks/useRequest";
+import { useNavigation } from "@react-navigation/native";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 
 //empty customer cart
-const customerBasket = [
+let customerBasket = [
   {
     customerId: 0,
     productId: 0,
@@ -22,10 +26,14 @@ export const ShopContextProvider = (props: any) => {
   const [customerCart, setCustomerCart] = useState<any>(customerBasket);
   const [customerCartLength, setCustomerCartLength] = useState<any>(0);
   const [addToCartLoading, setAddToCartLoading] = useState<boolean>(false);
+  const [selectedCollectionId, setSelectedCollectionId] = useState<number>();
+  const [cartToDb, setCartToDb] = useState<boolean>(true);
+  const navigation: any = useNavigation();
 
   //get the selected collection from the collection modal
-  const getSelectedCollection = (itemName: string) => {
+  const getSelectedCollection = (itemName: string, itemId: number) => {
     setSelectedCollection(itemName);
+    setSelectedCollectionId(itemId);
   };
 
   //add particular product to cart
@@ -145,6 +153,101 @@ export const ShopContextProvider = (props: any) => {
     ]);
   };
 
+  const postCartToDb = (
+    gottenCustomerId: string,
+    gottenCustomerEmail: string,
+    gottenCustomerPhone: string
+  ) => {
+    if (customerCart && customerCart.length > 0) {
+      const cartItems = customerCart.filter(
+        (custCart: any) => custCart.productId !== 0
+      );
+      try {
+        if (cartItems && cartItems.length > 0) {
+          cartItems.map((prodItems: any, index: number) => {
+            pushCartToDb(
+              uuidv4(),
+              gottenCustomerId,
+              gottenCustomerEmail,
+              gottenCustomerPhone,
+              prodItems.productId,
+              prodItems.prodName,
+              prodItems.image,
+              prodItems.price,
+              prodItems.countOfProd
+            );
+          });
+          Toast.show({
+            type: "success",
+            text1: "Cart Information",
+            text2: "payment made successfully",
+          });
+          const timer = setTimeout(() => {
+            navigation.goBack();
+            clearTimeout(timer);
+          }, 1000);
+        } else {
+          console.log("no cart items exist");
+        }
+      } catch (err) {
+        console.log("Error loading cart items", err);
+      }
+    }
+  };
+
+  const pushCartToDb = async (
+    gottenId: string,
+    gottenCustomerId: string,
+    gottenCustomerEmail: string,
+    gottenCustomerPhone: string,
+    gottenProdId: number,
+    gottenProdName: string,
+    gottenImage: string,
+    gottenPrice: number,
+    gottenCountOfProd: number
+  ) => {
+    setCartToDb(true);
+    const { status } = await PostRequest(
+      `${url}carts`,
+      {
+        id: gottenId,
+        customerId: gottenCustomerId,
+        customerEmail: gottenCustomerEmail,
+        customerPhone: gottenCustomerPhone,
+        productId: gottenProdId,
+        prodName: gottenProdName,
+        image: gottenImage,
+        price: gottenPrice,
+        countOfProd: gottenCountOfProd,
+      },
+      axiosConfig
+    );
+    setCartToDb(true);
+    try {
+      if (status === 201) {
+        setCartToDb(false);
+        updateCartItemAfterSuccessfulPayment();
+        console.log("cart posted successfully");
+      } else {
+        setCartToDb(true);
+        console.log("cart not posted successfully");
+      }
+    } catch (err) {
+      setCartToDb(false);
+      console.log("Error posting cart to db", err);
+    }
+  };
+
+  const updateCartItemAfterSuccessfulPayment = () => {
+    if (customerCart && customerCart.length > 0) {
+      const remainingCartAfterPayment = customerCart.filter(
+        (prodItems: any) => prodItems.productId === 0
+      );
+      console.log(remainingCartAfterPayment);
+      setCustomerCart(remainingCartAfterPayment);
+    }
+  };
+
   //get length of customer product in cart
   const getLengthOfCustomerCart = (gottenCustomerId: number) => {
     setAddToCartLoading(true);
@@ -166,13 +269,16 @@ export const ShopContextProvider = (props: any) => {
 
   const contextValue = {
     selectedCollection,
+    selectedCollectionId,
     getSelectedCollection,
     addToCart,
     customerCartLength,
     getLengthOfCustomerCart,
     customerCart,
+    setCustomerCart,
     addToCartLoading,
     removeFromCart,
+    postCartToDb,
   };
 
   return (

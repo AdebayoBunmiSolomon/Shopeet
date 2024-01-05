@@ -57,7 +57,7 @@ const Screen: React.FunctionComponent<{}> = () => {
               component={SheetModal}
               options={{
                 presentation: "transparentModal",
-                animation: "slide_from_bottom",
+                animation: "fade_from_bottom",
                 animationDuration: 100,
               }}
             />
@@ -66,7 +66,7 @@ const Screen: React.FunctionComponent<{}> = () => {
               component={ProductReview}
               options={{
                 presentation: "transparentModal",
-                animation: "slide_from_bottom",
+                animation: "fade",
                 animationDuration: 100,
               }}
             />
@@ -75,7 +75,7 @@ const Screen: React.FunctionComponent<{}> = () => {
               component={CartModal}
               options={{
                 presentation: "transparentModal",
-                animation: "slide_from_bottom",
+                animation: "fade_from_bottom",
                 animationDuration: 100,
               }}
             />

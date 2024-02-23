@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
-import { View, Text, TextInput, Dimensions } from "react-native";
+import React from "react";
+import { View, Text, TextInput } from "react-native";
 import { firstScreenStyle } from "./Style";
 import PhoneInput from "react-native-phone-number-input";
 import Animated, { BounceInLeft } from "react-native-reanimated";
-import { UseAuthContext } from "../../../../context/Auth/hooks/useAuth";
+import { AuthContext } from "../../../../context/Auth/hooks/useAuth";
 
 const First: React.FunctionComponent<{}> = () => {
-  const { signUpForm, setSignUpForm } = useContext(UseAuthContext);
+  const { signUpForm, setSignUpForm } = AuthContext();
 
   return (
     <Animated.View entering={BounceInLeft.delay(200)}>

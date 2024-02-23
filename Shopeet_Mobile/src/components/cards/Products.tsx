@@ -29,6 +29,7 @@ const Products: React.FunctionComponent<cardProps> = ({ data }) => {
         numColumns={2}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item: any) => "#" + item.id}
+        initialNumToRender={4}
         renderItem={({ item }: any) => (
           <TouchableOpacity
             style={productListStyle.productListView}

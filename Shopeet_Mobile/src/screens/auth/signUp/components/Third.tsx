@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { View, Text, TextInput } from "react-native";
 import { thirdScreenStyle } from "./Style";
 import Animated, { ZoomIn } from "react-native-reanimated";
-import { UseAuthContext } from "../../../../context/Auth/hooks/useAuth";
+import { AuthContext } from "../../../../context/Auth/hooks/useAuth";
 
 const Third: React.FunctionComponent<{}> = () => {
-  const { signUpForm, setSignUpForm } = useContext(UseAuthContext);
+  const { signUpForm, setSignUpForm } = AuthContext();
   return (
     <Animated.View entering={ZoomIn.damping(300)}>
       <View style={thirdScreenStyle.formView}>
@@ -20,17 +20,6 @@ const Third: React.FunctionComponent<{}> = () => {
             keyboardType='default'
           />
         </View>
-        {/* <View>
-          <Text style={thirdScreenStyle.label}>Enter Confirm Password</Text>
-          <TextInput
-            style={thirdScreenStyle.textInput}
-            secureTextEntry={true}
-            onChangeText={(conPassword) => {
-              setSignUpForm({ ...signUpForm, conPassword: conPassword });
-            }}
-            keyboardType='default'
-          />
-        </View> */}
       </View>
     </Animated.View>
   );

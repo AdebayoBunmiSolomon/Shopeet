@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import Toast from "react-native-toast-message";
 import { url, PostRequest } from "./useRequest";
 import {
@@ -222,4 +222,8 @@ export const UseAuthContextProvider = (props: any) => {
       {props.children}
     </UseAuthContext.Provider>
   );
+};
+
+export const AuthContext = () => {
+  return useContext(UseAuthContext);
 };

@@ -1,6 +1,6 @@
 {
   "headers": {
-    "Access-Control-Allow-Origin": "exp://192.168.223.35:8081",
+    "Access-Control-Allow-Origin": "exp://192.168.223.47:8081",
     "Access-Control-Allow-Headers": "Content-Type, Authorization"
   },
   "admins": [
@@ -110,6 +110,17 @@
       "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/12/2939552/1.jpg?1287",
       "price": 1000,
       "countOfProd": 7
+    },
+    {
+      "id": "7e502331-7e5e-49d9-b9c0-89485cdedbc7",
+      "customerId": "787b1770-5885-41f6-81b0-451ba27df657",
+      "customerEmail": "solomon.bunmi@yahoo.com",
+      "customerPhone": "2349076544966",
+      "productId": 4,
+      "prodName": "Redmi Note 12 Pro",
+      "image": "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/31/4142352/1.jpg?0794",
+      "price": 1000,
+      "countOfProd": 2
     }
   ],
   "customers": [
@@ -132,6 +143,26 @@
       "password": "Solo41526374",
       "deviceName": "TECNO KD7",
       "deviceImei": "33d7265f-0a7a-4967-993f-cccbd9f1c166"
+    },
+    {
+      "id": "787b1770-5885-41f6-81b0-451ba27df657",
+      "fullName": "adebayo bunmi solomon",
+      "phone": "2349076544966",
+      "username": "adebunmy",
+      "email": "solomon.bunmi@yahoo.com",
+      "password": "12345678",
+      "deviceName": "TECNO KD7",
+      "deviceImei": "787b1770-5885-41f6-81b0-451ba27df657"
+    },
+    {
+      "id": "0a912313-8c60-48c2-8766-0e6e2b5a279a",
+      "fullName": "adebayo bunmi solomon",
+      "phone": "234907654496",
+      "username": "bun",
+      "email": "adebayoenoch400@gmail.com",
+      "password": "Yup",
+      "deviceName": "TECNO KD7",
+      "deviceImei": "0a912313-8c60-48c2-8766-0e6e2b5a279a"
     }
   ],
   "customerHistory": [],
